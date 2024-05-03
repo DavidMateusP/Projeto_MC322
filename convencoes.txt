@@ -1,0 +1,15 @@
+Nome de Variaveis
+corCarro
+PortaVerde
+
+Tabulação:
+
+if(condição){
+
+}
+
+Comentarios
+-comentários de classe
+
+Commits
+- Escrever de forma formal, usar padrões de industria.
