@@ -9,12 +9,13 @@ public class Loan {
     private double totalValue;
 
     // Constructor
-    public Loan(Client client, Item item, LocalDate deadline, double totalValue) {
+    public Loan(Client client, Item item, LocalDate deadline) {
         this.client = client;
         this.item = item;
         this.deadline = deadline;
-        this.totalValue = totalValue;
+        this.totalValue = item.getCost();
     }
+
 
     // Getters and Setters
     public Client getClient() {
@@ -51,6 +52,11 @@ public class Loan {
     
 
     // Object methods
+
+    /*Calculates the penalty based on the days of delay to return the item
+     * and it's original cost of rent
+     * Returns a double
+     */
     private double calcPenalty() {
         double penalty;
         // penalty of 2% on the original cost of the item
@@ -58,7 +64,7 @@ public class Loan {
 
         // Calculates how many days late the item is
         LocalDate currentDate = LocalDate.now();
-        double lateDays = ChronoUnit.DAYS.between(deadline, currentDate);
+        long lateDays = ChronoUnit.DAYS.between(deadline, currentDate);
 
         // Returns the penalty based on how many days are late and the original item's value
         return (item.getCost() * PENALTYPERCENTAGE) * lateDays;
@@ -98,6 +104,7 @@ public class Loan {
             return false;
         } 
         // The item is not late -> implement
+        client.getLoans().remove(this);
         return true;
     }
 
