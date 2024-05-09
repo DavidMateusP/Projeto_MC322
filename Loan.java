@@ -7,13 +7,15 @@ public class Loan {
     private Item item;
     private LocalDate deadline;
     private double totalValue;
+    private boolean renewed;
 
     // Constructor
     public Loan(Client client, Item item, LocalDate deadline) {
         this.client = client;
         this.item = item;
         this.deadline = deadline;
-        this.totalValue = item.getCost();
+        this.totalValue = item.getPrice();
+        this.renewed = false;
     }
 
 
@@ -49,6 +51,10 @@ public class Loan {
     public void setTotalValue(double totalValue) {
         this.totalValue = totalValue;
     }
+
+    public boolean getRenewed() {
+        return renewed;
+    }
     
 
     // Object methods
@@ -58,41 +64,80 @@ public class Loan {
      * Returns a double
      */
     private double calcPenalty() {
-        double penalty;
-        // penalty of 2% on the original cost of the item
-        final double PENALTYPERCENTAGE = 0.02;
+        // penalty of 10% on the original cost of the item
+        final double PENALTYPERCENTAGE = 0.1;
 
         // Calculates how many days late the item is
         LocalDate currentDate = LocalDate.now();
         long lateDays = ChronoUnit.DAYS.between(deadline, currentDate);
 
         // Returns the penalty based on how many days are late and the original item's value
-        return (item.getCost() * PENALTYPERCENTAGE) * lateDays;
+        return (item.getPrice() * PENALTYPERCENTAGE) * lateDays;
     }
 
     /*
      * Verifies if the item is late 
-     * if it is late: deducts the penalty cost from the clients balance
+     * if it is late: deducts the penalty cost from the clients balance and updates the loan's total cost
      * if it is not: returns false
      */
     public boolean isLate() {
         if(deadline.isBefore(LocalDate.now())) {
             double penalty = calcPenalty();
+
+            // Substracts the value of the penalty from the client's balance
             client.setBalance(client.getBalance() - penalty);
+
+            // Adds the penalty value to the total cost of the loan
+            setTotalValue(totalValue + penalty);
             return true;
         }
         return false;
     }
 
-    /*To consider: do we want a maximmum amount of days to renew? */
+    /*
+    Calculates the cost to renew an item based on the days added 
+     * The loan should be renewed to 5, 10 or 15 days
+    */
+    private double calcRenewCost(int days) {
+        double initialPrice = item.getPrice();
+        switch (days) {
+            case 5:
+                return 0.4 * initialPrice;
+            
+            case 10:
+                return 0.6 * initialPrice;
+            
+            case 15:
+                return 0.8 * initialPrice;
+            
+            // Days passed as an invalid argument (not 5, 10 or 15)
+            default:
+                return -1;
+        }
+    }
+
+    
     public boolean renewItem(int days) {
         // Verifies if the loan is late on the return deadline
         if(isLate()) {
             System.err.println("The item borrowed is late, it could not be renewed.");
             return false;
         } 
-        // Adds x days to the new deadline
+        
+        // This loan was already renewed
+        if (getRenewed()) {
+            System.err.println("Sorry! You can only renew this item once.");
+            return false;
+        }
+        
+        double newCost = calcRenewCost(days);
+        if(newCost == -1) {
+            System.err.println("Sorry! You can only rent it for 5, 10 or 15 days!");
+            return false;
+        }
+
         setDeadline(deadline.plusDays(days));
+        setTotalValue(totalValue + newCost);
         return true;
     }
 
