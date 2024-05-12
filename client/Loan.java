@@ -1,6 +1,10 @@
 
+package client;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
+import products.Item;
 
 public class Loan {
     private Client client;

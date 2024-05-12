@@ -1,4 +1,8 @@
+package products;
 import java.util.ArrayList;
+
+import client.Loan;
+import client.Rating;
 
 public abstract class Item {
     private ArrayList<Loan> loans;
@@ -7,9 +11,22 @@ public abstract class Item {
     private int releaseYear;
     private int recommendedAge;
     private double price;
-    private int rating[] = new int[5];
+    private ArrayList<Rating> ratings;
+    private int avarageRating;
 
     
+    // Constructor method
+    protected Item(int quantity, String name, int releaseYear, int recommendedAge, double price) {
+        loans = new ArrayList<>();
+        ratings = new ArrayList<>();
+        this.quantity = quantity;
+        this.name = name;
+        this.releaseYear = releaseYear;
+        this.recommendedAge = recommendedAge;
+        this.price = price;
+        avarageRating = -1; //Value for not yet evaluated
+    }
+
     private boolean validateRating(int rating) {
         return false;
     }
@@ -72,6 +89,36 @@ public abstract class Item {
     }
 
     public void setRating(int[] rating) {
-        this.rating = rating;
+        this.ratings = ratings;
+    }
+
+    public ArrayList<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(ArrayList<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public int getAvarageRating() {
+        return avarageRating;
+    }
+
+    public void setAvarageRating(int avarageRating) {
+        this.avarageRating = avarageRating;
+    }
+
+
+    // Methods
+
+    /**
+     * @param rating
+     */
+    public void addRating(Rating rating){
+        ratings.add(rating);
+        int numRates = ratings.size();
+        for (Rating r : ratings) {
+            avarageRating += r.getRate();
+        }
     }
 }

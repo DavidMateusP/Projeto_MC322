@@ -1,3 +1,4 @@
+package products;
 import java.util.ArrayList;
 
 public class Movie {

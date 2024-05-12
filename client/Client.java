@@ -1,5 +1,13 @@
+
+package client;
+
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import products.Item;
+import client.Loan;
+
 
 public class Client {
     private double balance;
