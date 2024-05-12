@@ -1,41 +1,34 @@
 package client;
 
 public class Rating {
-    
+
     private String comment;
-    private int rate;
+    private int rating;
 
-
-    
-    public Rating(String comment, int rate) {
+    public Rating(String comment, int rating) {
         this.comment = comment;
-        this.rate = rate;
+        setRating(rating);
     }
-
-
 
     public String getComment() {
         return comment;
     }
 
-
-
     public void setComment(String comment) {
         this.comment = comment;
     }
 
-
-
-    public int getRate() {
-        return rate;
+    public int getRating() {
+        return rating;
     }
 
-
-
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setRating(int rating) {
+        if (rating < 0) {
+            rating = 0;
+        } else if (rating > 5) {
+            rating = 5;
+        }
+        this.rating = rating;
     }
 
-    
-    
 }

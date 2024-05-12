@@ -1,4 +1,5 @@
 package products;
+
 public class Book extends Item {
     private int pages;
 
@@ -15,6 +16,4 @@ public class Book extends Item {
         this.pages = pages;
     }
 
-
-    
 }
