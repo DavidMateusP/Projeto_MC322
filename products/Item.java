@@ -1,4 +1,5 @@
 package products;
+
 import java.util.ArrayList;
 
 import client.Loan;
@@ -12,9 +13,7 @@ public abstract class Item {
     private int recommendedAge;
     private double price;
     private ArrayList<Rating> ratings;
-    private int avarageRating;
 
-    
     // Constructor method
     protected Item(int quantity, String name, int releaseYear, int recommendedAge, double price) {
         loans = new ArrayList<>();
@@ -24,28 +23,27 @@ public abstract class Item {
         this.releaseYear = releaseYear;
         this.recommendedAge = recommendedAge;
         this.price = price;
-        avarageRating = -1; //Value for not yet evaluated
     }
 
-    private boolean validateRating(int rating) {
-        return false;
+    public int getReviewCount() {
+        return ratings.size();
     }
 
-    private int getReviewCount() {
-        return 0;
+    public double getAverageRating() {
+        return ratings.stream().mapToInt((Rating r) -> r.getRating()).sum() / getReviewCount();
     }
 
-    private int getRating() {
-        return 0;
-    }
-
-    //Getters and Setters
+    // Getters and Setters
     public ArrayList<Loan> getLoans() {
         return loans;
     }
 
-    public void setLoans(ArrayList<Loan> loans) {
-        this.loans = loans;
+    public void addLoan(Loan loan) {
+        loans.add(loan);
+    }
+
+    public void removeLoan(Loan loan) {
+        loans.remove(loan);
     }
 
     public int getQuantity() {
@@ -54,6 +52,10 @@ public abstract class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getAvailableQuantity() {
+        return quantity - loans.size();
     }
 
     public String getName() {
@@ -88,37 +90,11 @@ public abstract class Item {
         this.price = price;
     }
 
-    public void setRating(int[] rating) {
-        this.ratings = ratings;
-    }
-
     public ArrayList<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(ArrayList<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public int getAvarageRating() {
-        return avarageRating;
-    }
-
-    public void setAvarageRating(int avarageRating) {
-        this.avarageRating = avarageRating;
-    }
-
-
-    // Methods
-
-    /**
-     * @param rating
-     */
-    public void addRating(Rating rating){
+    public void addRating(Rating rating) {
         ratings.add(rating);
-        int numRates = ratings.size();
-        for (Rating r : ratings) {
-            avarageRating += r.getRate();
-        }
     }
 }

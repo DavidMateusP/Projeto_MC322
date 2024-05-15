@@ -1,14 +1,14 @@
 package products;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 public class Album extends Item {
     private ArrayList<String> tracks;
-    
+
     // Constructor method
-    public Album(int quantity, String name,int releaseYear,int recommendedAge,int price){
+    public Album(int quantity, String name, int releaseYear, int recommendedAge, int price) {
         super(quantity, name, releaseYear, recommendedAge, price);
-        this.tracks = new ArrayList<>();        
+        this.tracks = new ArrayList<>();
     }
 
     public ArrayList<String> getTracks() {
@@ -18,7 +18,5 @@ public class Album extends Item {
     public void setTracks(ArrayList<String> tracks) {
         this.tracks = tracks;
     }
-
-
 
 }
