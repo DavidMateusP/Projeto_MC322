@@ -10,6 +10,7 @@ public class Client {
     private ArrayList<Loan> loans;
     private String name;
     private LocalDate birthDate;
+    private String cpf;
 
     // Constructor method
     public Client(String name, LocalDate birthDate) {
@@ -17,6 +18,14 @@ public class Client {
         this.birthDate = birthDate;
         this.balance = 0;
         this.loans = new ArrayList<>();
+    }
+
+    public Client(String name, LocalDate birthDate, String cpf) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.balance = 0;
+        this.loans = new ArrayList<>();
+        this.cpf = cpf;
     }
 
     // Getters and Setters
@@ -31,6 +40,10 @@ public class Client {
 
     public double getBalance() {
         return balance;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 
     public void changeBalance(double amount) {

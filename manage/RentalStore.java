@@ -37,6 +37,18 @@ public class RentalStore {
         return this.clients.remove(this.clients.indexOf(client));
     }
 
+    public boolean alreadySigned(String cpf) {
+        for (Client client : clients) {
+            if (client.getCpf().equals(cpf)) {
+                // client is arleady signed in the rental store
+                return true;
+            }
+        }
+        // if went through every object Client in the ArrayList, there is no 
+        // client with this cpf signed up yet
+        return false;
+    }
+
     @Override
     public String toString() {
         String list = "Rental Store\n\tProducts:\t";
