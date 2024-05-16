@@ -13,13 +13,6 @@ public class Client {
     private String cpf;
 
     // Constructor method
-    public Client(String name, LocalDate birthDate) {
-        this.name = name;
-        this.birthDate = birthDate;
-        this.balance = 0;
-        this.loans = new ArrayList<>();
-    }
-
     public Client(String name, LocalDate birthDate, String cpf) {
         this.name = name;
         this.birthDate = birthDate;
