@@ -15,8 +15,8 @@ public class Album extends Item {
         return tracks;
     }
 
-    public void setTracks(ArrayList<String> tracks) {
-        this.tracks = tracks;
+    public void addTrack(String track) {
+        this.tracks.add(track);
     }
 
 }
