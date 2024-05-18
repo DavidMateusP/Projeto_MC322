@@ -3,6 +3,7 @@ package products;
 import java.util.ArrayList;
 
 import client.Loan;
+import client.Rates;
 import client.Rating;
 
 public abstract class Item {
@@ -29,8 +30,24 @@ public abstract class Item {
         return ratings.size();
     }
 
-    public double getAverageRating() {
-        return ratings.stream().mapToInt((Rating r) -> r.getRating()).sum() / getReviewCount();
+    public Rates getAverageRating() {
+        double avarage =  ratings.stream().mapToDouble((Rating r) -> r.getRating().getValue()).sum()/getReviewCount();
+
+        if (avarage > 8) {
+            return Rates.VERY_GOOD;
+        }
+        else if (avarage > 6) {
+            return Rates.GOOD;
+            
+        } else  if(avarage > 4){
+            return Rates.OK;
+            
+        } else if(avarage > 2){
+            return Rates.BAD;
+        } else{
+            return Rates.VERY_BAD;
+        }
+
     }
 
     // Getters and Setters

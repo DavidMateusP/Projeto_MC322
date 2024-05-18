@@ -1,13 +1,14 @@
 package client;
 
+
 public class Rating {
 
     private String comment;
-    private int rating;
+    private Rates rating;
 
-    public Rating(String comment, int rating) {
+    public Rating(String comment, Rates rating) {
         this.comment = comment;
-        setRating(rating);
+        this.rating = rating;
     }
 
     public String getComment() {
@@ -18,16 +19,11 @@ public class Rating {
         this.comment = comment;
     }
 
-    public int getRating() {
+    public Rates getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
-        if (rating < 0) {
-            rating = 0;
-        } else if (rating > 5) {
-            rating = 5;
-        }
+    public void setRating(Rates rating) {
         this.rating = rating;
     }
 
