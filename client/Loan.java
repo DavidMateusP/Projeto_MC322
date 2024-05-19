@@ -13,7 +13,7 @@ public class Loan {
     private boolean renewed;
 
     // Constructor
-    private Loan(Client client, Item item, LocalDate deadline) {
+    public Loan(Client client, Item item, LocalDate deadline) {
         this.client = client;
         this.item = item;
         this.deadline = deadline;
@@ -27,26 +27,23 @@ public class Loan {
         }
 
         if (client.getBalance() < 0) {
-            // System.err.println("Sorry! You could not rent any new item, because you have
-            // a debt of "+getBalance());
+            System.err.println("Sorry! You could not rent any new item, because you have a debt of "+getBalance());
             return false;
         }
 
         if (client.hasLateItems()) {
-            // System.err.println("Sorry! You could not rent any new item, because you
-            // exceeded the return deadline of one of your items");
+            System.err.println("Sorry! You could not rent any new item, because you exceeded the return deadline of one of your items");
             return false;
         }
 
         // limits the amount of simultaneous loans to 5 items
         if (client.getLoans().size() >= 5) {
-            // System.out.println("Sorry! You could not rent any new items, because you have
-            // 5 items still rented.");
+            System.out.println("Sorry! You could not rent any new items, because you have 5 items still rented.");
             return false;
         }
 
         if (client.getAge() < item.getRecommendedAge()) {
-            // System.err.println("Sorry! You are not old enough.");
+            System.err.println("Sorry! You are not old enough.");
             return false;
         }
 
@@ -62,8 +59,7 @@ public class Loan {
         // Charges the client for the loan;
         client.changeBalance(-item.getPrice());
 
-        // System.out.println("Enjoy "+item.getName()+"! You can return it or renew it
-        // until: "+loan.getDeadline());
+        System.out.println("Enjoy "+item.getName()+"! You can return it or renew it until: "+loan.getDeadline());
         return true;
     }
 
