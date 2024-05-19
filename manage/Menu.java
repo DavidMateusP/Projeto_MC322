@@ -11,10 +11,12 @@ import products.BoardGame;
 import products.Book;
 import products.Item;
 import products.Movie;
+import client.Loan;
 
 public class Menu {
-    private static RentalStore rental = new RentalStore();
-    private static Scanner input = new Scanner(System.in);
+    private RentalStore rental = new RentalStore();
+    private Scanner input = new Scanner(System.in);
+    private String userCPF;
 
     public static int addProductMenu(){
         //TODO: treat exceptions, check items' toString()
@@ -187,13 +189,13 @@ public class Menu {
 
             switch(option) {
                 case 1:
-                    //signIn();
+                    signIn();
                     break;
                 case 2:
                     signUp();
                     break;
                 case 3:
-                    // loan/addLoan();
+                    loan();
                     break;
                 default:
                     System.err.println("Invalid Option!\n" + "\t\t\t:(\n");
@@ -203,7 +205,21 @@ public class Menu {
         return 0;
     }
 
-    private static boolean signUp() {
+    private boolean signIn() {
+        System.out.println("Please enter your cpf: ");
+        String cpf = input.nextLine();
+
+        if(!rental.alreadySigned(cpf)) {
+            System.err.println("You are not signed up yet. Please create an account!");
+            return false;
+        } 
+        System.out.println("Signed in successfully!");
+        userCPF = cpf;
+        return true;
+
+    }
+
+    private boolean signUp() {
         System.out.println("\tPlease, enter your full name:");
         String name = input.nextLine();
 
@@ -255,5 +271,42 @@ public class Menu {
 
         return true;
     }   
+
+    private boolean loan() {
+        if(!signIn()) {
+            // Not signed in
+            System.out.println("You should sign in first, please.");
+            return false;
+        }
+
+        Client client = rental.searchClient(userCPF);
+
+        System.out.println("Please, enter the name of the item you would like to borrow: ");
+        String product = input.nextLine();
+
+        if(rental.getProducts().size() == 0) {
+            return false;
+        } 
+
+        for(Item item : rental.getProducts()) {
+            if(item.getName().equals(product)) {
+                if(item.getAvailableQuantity() > 0) {
+                    // There is an available item
+                    if (Loan.newLoan(client, item)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    // The item is not available 
+                    System.err.println("Sorry, this item is currently out of stock.");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    
 
 }

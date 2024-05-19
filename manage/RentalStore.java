@@ -49,6 +49,16 @@ public class RentalStore {
         return false;
     }
 
+    public Client searchClient(String cpf) {
+        for(Client client : clients) {
+            if(client.getCpf().equals(cpf)) {
+                // found the client by their CPF
+                return client;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         String list = "Rental Store\n\tProducts:\t";
