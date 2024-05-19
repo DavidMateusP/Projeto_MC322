@@ -6,7 +6,7 @@ public class Album extends Item {
     private ArrayList<String> tracks;
 
     // Constructor method
-    public Album(int quantity, String name, int releaseYear, int recommendedAge, int price) {
+    public Album(int quantity, String name, int releaseYear, int recommendedAge, double price) {
         super(quantity, name, releaseYear, recommendedAge, price);
         this.tracks = new ArrayList<>();
     }

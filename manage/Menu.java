@@ -2,6 +2,7 @@ package manage;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import client.Client;
@@ -12,83 +13,167 @@ import products.Item;
 import products.Movie;
 
 public class Menu {
-    private RentalStore rental = new RentalStore();
-    private Scanner input = new Scanner(System.in);
+    private static RentalStore rental = new RentalStore();
+    private static Scanner input = new Scanner(System.in);
 
-    public int managerMenu(){
+    public static int addProductMenu(){
+        //TODO: treat exceptions, check items' toString()
+        int option = 0;
+        String name = "";
+        int quantity = 0, releaseYear = 0, recommendedAge = 0;
+        double price = 0;
+        Item newProduct;
+        do{
+            System.out.println("\tChoose a type of product:\n"
+            + "\t\t[1] Album\n"
+            + "\t\t[2] Board Game\n"
+            + "\t\t[3] Book\n"
+            + "\t\t[4] Movie\n"
+            + "\t\t[5] Back");
+            option = Integer.parseInt(input.nextLine());
+            if (option >= 1 && option <= 4){
+                System.out.println("\tEnter name:");
+                name = input.nextLine();
+                System.out.println("\tEnter quantity:");
+                quantity = Integer.parseInt(input.nextLine());
+                System.out.println("\tEnter year of release (YYYY):");
+                releaseYear = Integer.parseInt(input.nextLine());
+                System.out.println("\tEnter  appropriate age:");
+                recommendedAge = Integer.parseInt(input.nextLine());
+                System.out.println("\tEnter price (0.00):");
+                price = Double.parseDouble(input.nextLine());
+            }
+    
+            switch(option){
+                case 1:
+                    newProduct = new Album(quantity, name, releaseYear, recommendedAge, price);
+                    
+                    System.out.println("\tEnter number of tracks:");
+                    int numTracks = Integer.parseInt(input.nextLine());
+                    for (int i = 0; i < numTracks; i++){
+                        System.out.println("\tEnter name of track " + (i + 1) + ":");
+                        String track = input.nextLine();
+                        ((Album)newProduct).addTrack(track);
+                    }
+                    
+                    rental.addProduct(newProduct);
+                    System.out.println("\tProduct added to stock! :)");
+                    break;
+
+                case 2:
+                    System.out.println("\tEnter minimum number of players:");
+                    int minPlayers = Integer.parseInt(input.nextLine());
+                    System.out.println("\tEnter maximum number of players:");
+                    int maxPlayers = Integer.parseInt(input.nextLine());
+                    
+                    newProduct = new BoardGame(quantity, name, releaseYear, recommendedAge, price, minPlayers, maxPlayers);
+                    rental.addProduct(newProduct);
+                    System.out.println("\tProduct added to stock! :)");
+                    break;
+
+                case 3:
+                    System.out.println("\tEnter number of pages:");
+                    int pages = Integer.parseInt(input.nextLine());
+                    
+                    newProduct = new Book(quantity, name, releaseYear, recommendedAge, price, pages);
+                    rental.addProduct(newProduct);
+                    System.out.println("\tProduct added to stock! :)");
+                    break;
+
+                case 4:
+
+                    System.out.println("\tEnter cast (Actor 1, Actor 2, Actor 3)");
+                    String cast = input.nextLine();
+                    
+                    ArrayList<String> subtitleLanguages = new ArrayList<String>();
+                    System.out.println("\tEnter number of subtitle languages:");
+                    int numSubtitles = Integer.parseInt(input.nextLine());
+                    for (int i = 0; i < numSubtitles; i++){
+                        System.out.println("\tEnter language:");
+                        String language = input.nextLine();
+                        subtitleLanguages.add(language);
+                    }
+                    
+                    newProduct = new Movie(quantity, name, releaseYear, recommendedAge, price, cast, subtitleLanguages);
+                    rental.addProduct(newProduct);
+                    System.out.println("\tProduct added to stock! :)");
+                    break;
+
+                case 5:
+                    break;
+
+                default:
+                    System.out.println("Invalid Option!\n" + "\t\t\t:(\n");
+            }
+        }while(option != 5);
+        return 0;
+    }
+
+    public static int editProductMenu(){
+        int option = 0;
+        int size = rental.getProducts().size();
+
+        if (size == 0){
+            System.out.println("\tThere is no product to edit.\n"); 
+            return 0;
+        }
+
+        do{
+        System.out.println("\tChoose a product to edit:");
+        for (int i = 0; i < size; i++){
+            System.out.println("\t\t["+ (i + 1) + "] " + rental.getProducts().get(i).getClass().getName().substring(9) + " " + rental.getProducts().get(i).getName());
+        }
+        System.out.println("\t\t["+ (size + 1) + "] Back");
+        option = Integer.parseInt(input.nextLine());
+        Item product = rental.getProducts().get(option - 1);
+        // TODO: menus for each one
+        if (product.getClass().getName().substring(9) == "Album"){
+            System.out.println("It is an Album");
+        }
+        else if (product.getClass().getName().substring(9) == "BoardGame"){
+            System.out.println("It is a Board Game");
+        }
+        else if (product.getClass().getName().substring(9) == "Book"){
+            System.out.println("It is a Book");
+        }
+        else if (product.getClass().getName().substring(9) == "Movie"){
+            System.out.println("It is a Movie");
+        }
+
+        }  while (option != size + 1);
+        return 0;
+    }
+
+    public static int managerMenu(){
         int option = 0;
         System.out.println("Welcome!\n");
         do{
         System.out.println("\tChoose an action:\n"
-                            + "\t\t[1] Add Client\n"
-                            + "\t\t[2] Back\n");
+                            + "\t\t[1] Add product\n"
+                            + "\t\t[2] Edit product\n"
+                            + "\t\t[3] Back\n");
         option = Integer.parseInt(input.nextLine());
         switch(option){
             case 1: // Add Product
-                int optionProduct = 0;
-                String name;
-                int quantity, releaseYear, recommendedAge;
-                double price;
-                Item newProduct;
-                do{
-                    System.out.println("\tChoose a type of product:\n"
-                    + "\t\t[1] Album\n"
-                    + "\t\t[2] Board Game\n"
-                    + "\t\t[3] Book\n"
-                    + "\t\t[4] Movie\n"
-                    + "\t\t[5] Back");
-                    optionProduct = Integer.parseInt(input.nextLine());
-                    if (optionProduct >= 1 && optionProduct <= 4){
-                        System.out.println("\tEnter name:");
-                        name = input.nextLine();
-                        System.out.println("\tEnter quantity:");
-                        quantity = Integer.parseInt(input.nextLine());
-                        System.out.println("\tEnter year of release (YYYY):");
-                        releaseYear = Integer.parseInt(input.nextLine());
-                        System.out.println("\tEnter  appropriate age:");
-                        recommendedAge = Integer.parseInt(input.nextLine());
-                        System.out.println("\tEnter price (0.00):");
-                        price = Double.parseDouble(input.nextLine());
-                    }
-                    // int quantity, String name, int releaseYear, int recommendedAge, double price
-                    switch(optionProduct){
-                        case 1:
-                            newProduct = new Album(quantity, name, releaseYear, recommendedAge, price);
-                            System.out.println("\tEnter number of tracks:");
-                            int numTracks = Integer.parseInt(input.nextLine());
-                            for (int i = 0; i < numTracks; i++){
-                                System.out.println("\tEnter name of track " + (i + 1) + ":");
-                                String track = input.nextLine();
-                                ((Album)newProduct).addTrack(track);
-                            }
-                            break;
-                        case 2:
-                            newProduct = new BoardGame();
-                            break;
-                        case 3:
-                            newProduct = new Book();
-                            break;
-                        case 4:
-                            newProduct = new Movie();
-                            break;
-                        case 5:
-                            break;
-                        default:
-                            System.out.println("Invalid Option!\n" + "\t\t\t:(\n");
-                    }
-                }while(optionProduct <= 0 || optionProduct > 5);
+                addProductMenu();
                 break;
-            case 2:
+
+            case 2: //Edit product
+                editProductMenu();
                 break;
+
+            case 3: // Back
+                break;
+
             default:
                 System.out.println("Invalid Option!\n" + "\t\t\t:(\n");
         }
         
-        } while (option != 1 && option != 2);
+        } while (option != 3);
         return 0;
     }
 
-    public int clientMenu() {
+    public static int clientMenu() {
         int option;
         System.out.println("Welcome!\n");
         do {
@@ -118,7 +203,7 @@ public class Menu {
         return 0;
     }
 
-    private boolean signUp() {
+    private static boolean signUp() {
         System.out.println("\tPlease, enter your full name:");
         String name = input.nextLine();
 
