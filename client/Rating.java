@@ -7,13 +7,12 @@ public class Rating {
     private String comment;
     private Rates rating;
 
-
     public Rating(String comment, Rates rating) {
         this.comment = comment;
         this.rating = rating;
     }
 
-    public Rating(Rates rating){
+    public Rating(Rates rating) {
         this.comment = " ";
         this.rating = rating;
     }
@@ -34,21 +33,18 @@ public class Rating {
         this.rating = rating;
     }
 
-    public static Rates avarageRating(ArrayList<Rating> ratings){
-        double avarage =  ratings.stream().mapToDouble((Rating r) -> r.getRating().getValue()).sum()/ ratings.size();
+    public static Rates averageRating(ArrayList<Rating> ratings) {
+        double average = ratings.stream().mapToDouble((Rating r) -> r.getRating().getValue()).sum() / ratings.size();
 
-        if (avarage > 8) {
+        if (average > 8) {
             return Rates.VERY_GOOD;
-        }
-        else if (avarage > 6) {
+        } else if (average > 6) {
             return Rates.GOOD;
-            
-        } else  if(avarage > 4){
+        } else if (average > 4) {
             return Rates.OK;
-            
-        } else if(avarage > 2){
+        } else if (average > 2) {
             return Rates.BAD;
-        } else{
+        } else {
             return Rates.VERY_BAD;
         }
     }
