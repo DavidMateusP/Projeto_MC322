@@ -31,22 +31,7 @@ public abstract class Item {
     }
 
     public Rates getAverageRating() {
-        double avarage =  ratings.stream().mapToDouble((Rating r) -> r.getRating().getValue()).sum()/getReviewCount();
-
-        if (avarage > 8) {
-            return Rates.VERY_GOOD;
-        }
-        else if (avarage > 6) {
-            return Rates.GOOD;
-            
-        } else  if(avarage > 4){
-            return Rates.OK;
-            
-        } else if(avarage > 2){
-            return Rates.BAD;
-        } else{
-            return Rates.VERY_BAD;
-        }
+        return Rating.avarageRating(this.ratings);
 
     }
 

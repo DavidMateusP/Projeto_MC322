@@ -2,8 +2,12 @@ package products;
 
 import java.util.ArrayList;
 
+import client.Rates;
+import client.Rating;
+
 public class Album extends Item {
-    private ArrayList<String> tracks;
+    private ArrayList<Track> tracks;
+
 
     // Constructor method
     public Album(int quantity, String name, int releaseYear, int recommendedAge, double price) {
@@ -11,12 +15,23 @@ public class Album extends Item {
         this.tracks = new ArrayList<>();
     }
 
-    public ArrayList<String> getTracks() {
+    public ArrayList<Track> getTracks() {
         return tracks;
     }
 
-    public void addTrack(String track) {
+    public void addTrack(Track track) {
         this.tracks.add(track);
     }
+
+
+    public void addRating(ArrayList<Rating> ratings) {
+
+        for (int i = 0; i < this.tracks.size(); i++) {
+            this.tracks.get(i).addRating(ratings.get(i));
+        }
+        this.addRating(new Rating(Rating.avarageRating(ratings))); 
+
+    }
+
 
 }

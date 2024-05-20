@@ -1,13 +1,20 @@
 package client;
 
+import java.util.ArrayList;
 
 public class Rating {
 
     private String comment;
     private Rates rating;
 
+
     public Rating(String comment, Rates rating) {
         this.comment = comment;
+        this.rating = rating;
+    }
+
+    public Rating(Rates rating){
+        this.comment = " ";
         this.rating = rating;
     }
 
@@ -25,6 +32,25 @@ public class Rating {
 
     public void setRating(Rates rating) {
         this.rating = rating;
+    }
+
+    public static Rates avarageRating(ArrayList<Rating> ratings){
+        double avarage =  ratings.stream().mapToDouble((Rating r) -> r.getRating().getValue()).sum()/ ratings.size();
+
+        if (avarage > 8) {
+            return Rates.VERY_GOOD;
+        }
+        else if (avarage > 6) {
+            return Rates.GOOD;
+            
+        } else  if(avarage > 4){
+            return Rates.OK;
+            
+        } else if(avarage > 2){
+            return Rates.BAD;
+        } else{
+            return Rates.VERY_BAD;
+        }
     }
 
 }
