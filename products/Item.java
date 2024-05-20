@@ -31,7 +31,7 @@ public abstract class Item {
     }
 
     public Rates getAverageRating() {
-        return Rating.avarageRating(this.ratings);
+        return Rating.averageRating(ratings);
 
     }
 

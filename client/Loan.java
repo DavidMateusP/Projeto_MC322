@@ -1,4 +1,3 @@
-
 package client;
 
 import java.time.LocalDate;
@@ -27,12 +26,15 @@ public class Loan {
         }
 
         if (client.getBalance() < 0) {
-            System.err.println("Sorry! You could not rent any new item, because you have a debt of "+getBalance());
+            System.err.println(
+                    "Sorry! You could not rent any new item, because you have a debt of "
+                            + Double.toString(client.getBalance()));
             return false;
         }
 
         if (client.hasLateItems()) {
-            System.err.println("Sorry! You could not rent any new item, because you exceeded the return deadline of one of your items");
+            System.err.println(
+                    "Sorry! You could not rent any new item, because you exceeded the return deadline of one of your items");
             return false;
         }
 
@@ -59,7 +61,7 @@ public class Loan {
         // Charges the client for the loan;
         client.changeBalance(-item.getPrice());
 
-        System.out.println("Enjoy "+item.getName()+"! You can return it or renew it until: "+loan.getDeadline());
+        System.out.println("Enjoy " + item.getName() + "! You can return it or renew it until: " + loan.getDeadline());
         return true;
     }
 
