@@ -40,7 +40,7 @@ public class RentalStore {
     public boolean alreadySigned(String cpf) {
         for (Client client : clients) {
             if (client.getCpf().equals(cpf)) {
-                // client is arleady signed in the rental store
+                // client is already signed in the rental store
                 return true;
             }
         }
