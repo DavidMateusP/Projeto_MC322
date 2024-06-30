@@ -45,7 +45,16 @@ public abstract class Item {
     }
 
     public void removeLoan(Loan loan) {
-        loans.remove(loan);
+        try {
+            if(loans.size() <= 0){
+                throw new IllegalAccessError("There is no loan.");
+            } else {
+                loans.remove(loan);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
     }
 
     public int getQuantity() {

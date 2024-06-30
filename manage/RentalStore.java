@@ -22,7 +22,20 @@ public class RentalStore {
     }
 
     public Item removeProduct(Item item) {
-        return this.products.remove(this.products.indexOf(item));
+        try {
+            int index = this.products.indexOf(item);
+            if (index < 0) {
+                throw new IllegalArgumentException("This product was not found.");
+            } else {
+                return this.products.remove(index);
+            } 
+            // return this.products.remove(this.products.indexOf(item));
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+
+        }
+        
     }
 
     public ArrayList<Client> getClients() {
@@ -34,7 +47,17 @@ public class RentalStore {
     }
 
     public Client removeClient(Client client) {
-        return this.clients.remove(this.clients.indexOf(client));
+        try {
+            int index = this.clients.indexOf(client);
+            if (index < 0) {
+                throw new IllegalArgumentException("This client was not found.");
+            } else {
+                return this.clients.remove(this.clients.indexOf(client));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public boolean alreadySigned(String cpf) {
