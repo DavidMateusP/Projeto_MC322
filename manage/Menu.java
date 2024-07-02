@@ -15,7 +15,7 @@ import products.Track;
 import client.Loan;
 
 public class Menu {
-    private static RentalStore rental = new RentalStore();
+    protected static RentalStore rental = new RentalStore();
     private static Scanner input = new Scanner(System.in);
     private static String userCPF;
 

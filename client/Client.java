@@ -1,10 +1,12 @@
 package client;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
-public class Client {
+public class Client implements Serializable {
+    private static final long serialVersionUID = 302L;
     private double balance;
     private ArrayList<Loan> loans;
     private String name;
