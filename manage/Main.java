@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
         int option = 0;
         System.out.println("Welcome to our rental store service!\n");
@@ -32,5 +33,8 @@ public class Main {
             } 
         } while (option != 3);
         input.close();
+
+        Menu.rental.productsFromFile();
+
     }
 }

@@ -1,12 +1,13 @@
 package products;
 
 import java.util.ArrayList;
-
+import java.io.Serializable;
 import client.Loan;
 import client.Rates;
 import client.Rating;
 
-public abstract class Item {
+public abstract class Item implements Serializable {
+    private static final long serialVersionUID = 302l;
     private ArrayList<Loan> loans;
     private int quantity;
     private String name;
