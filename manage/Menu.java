@@ -15,7 +15,7 @@ import products.Track;
 import client.Loan;
 
 public class Menu {
-    private static RentalStore rental = new RentalStore();
+    protected static RentalStore rental = new RentalStore();
     private static Scanner input = new Scanner(System.in);
     private static String userCPF;
 
@@ -46,7 +46,13 @@ public class Menu {
                     + "\t\t[3] Book\n"
                     + "\t\t[4] Movie\n"
                     + "\t\t[5] Back");
-            option = readInt();
+            try {
+                option = readInt();
+            } catch(NumberFormatException e) {
+                System.out.println("The option must be an integer.");
+            }
+
+            
             if (option >= 1 && option <= 4) {
                 System.out.println("\tEnter name:");
                 name = input.nextLine();
