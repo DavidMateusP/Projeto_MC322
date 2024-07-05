@@ -1,0 +1,221 @@
+@startuml Projeto MC322
+
+class Client{
+    __Attributes__
+    -double balance
+    -ArrayList<Loan> loans
+    -String name
+    -LocalDate birthDate
+    -String cpf
+
+    __Constructor__
+    + Client(String name, LocalDate birthDate, String cpf)
+    __Getters__
+    + String getName()
+    + int getAge()
+    + double getBalance()
+    + String getCpf()
+    __Methods__
+    + void changeBalance(double amount)
+    + ArrayList<Loan> getLoans()
+    + void addLoan(Loan loan)
+    + void removeLoan(Loan loan)
+    + boolean hasLateItems()
+}
+
+class Loan {
+    __Attributes__
+    - Client client
+    - Item item
+    - LocalDate deadline
+    - boolean renewed
+    __Constructor__
+    + Loan(Client client, Item item, LocalDate deadline)
+    __Setters__
+    + Client getClient()
+    + Item getItem()
+    + LocalDate getDeadline()
+    __Methods__
+    + boolean newLoan(Client client, Item item)
+    + boolean isRenewed()
+    - double calcPenalty()
+    + boolean isLate()
+    - double calcRenewCost(int days)
+    + boolean renewItem(int days)
+    + boolean returnItem(Rating itemReview)
+}
+
+
+class Rating {
+    __Attributes__
+    - String comment
+    - Rates rating
+    __Constructor__
+    + Rating(String comment, Rates rating)
+    __Setters__
+    + void setRating(Rates rating)
+    + void setComment(String comment)
+    __Getters__
+    + String getComment()
+    + Rates getRating()
+    __Methods__
+    + Rating(Rates rating)
+    + {static} Rates averageRating(ArrayList<Rating> ratings)
+}
+
+enum Rates {
+    VERY_GOOD
+    GOOD
+    OK
+    BAD
+    VERY_BAD
+    double value;
+    Rates(double value)
+    + double getValue()
+}
+
+
+abstract class Item{
+    __Attributes__
+    - ArrayList<Loan> loans
+    - int quantity
+    - String name
+    - int releaseYear
+    - int recommendedAge
+    - double price
+    - ArrayList<Rating> ratings
+    __Constructor__
+    # Item(int quantity, String name, int releaseYear, int recommendedAge, double price)
+    __Setters__
+    + void setName(String name)
+    + void setReleaseYear(int releaseYear)
+    + void setRecommendedAge(int recommendedAge)
+    + void setPrice(double price)
+    __Getters__
+    + int getReviewCount()
+    + Rates getAverageRating()
+    + int getQuantity()
+    + int getAvailableQuantity()
+    + String getName()
+    + int getReleaseYear()
+    + int getRecommendedAge()
+    + double getPrice()
+    + ArrayList<Rating> getRatings()
+    __Methods__
+    + void addLoan(Loan loan)
+    + void removeLoan(Loan loan)
+    + void addRating(Rating rating)
+}
+
+class Album{
+    __Attributes__
+    - ArrayList<Track> tracks
+    __Constructor__
+    + Album(int quantity, String name, int releaseYear, int recommendedAge, double price)
+    __Getters__
+    + ArrayList<Track> getTracks()
+    __Methods__
+    + void addTrack(Track track)
+    + void addRating(ArrayList<Rating> ratings)
+}
+Album --|> Item
+
+class BoardGame{
+    __Attributes__
+    - int minPlayers
+    - int maxPlayers
+    __Constructor__
+    + BoardGame(int quantity, String name, int releaseYear, int recommendedAge, double price, int minPlayers,int maxPlayers)
+    __Setters__
+    + void setMinPlayers(int minPlayers)
+    + void setMaxPlayers(int maxPlayers)
+    __Getters__
+    + int getMinPlayers()
+    + int getMaxPlayers()
+}
+BoardGame --|> Item
+
+class Book{
+    __Attributes__
+    + Book(int quantity, String name, int releaseYear, int recommendedAge, double price, int pages)
+    __Setters__
+    + void setPages(int pages)
+    __Getters__
+    + int getPages()
+}
+Book --|> Item
+
+class Movie{
+    __Attributes__
+    - String cast
+    - ArrayList<String> subtitleLanguages
+    __Constructor__
+    + Movie(int quantity, String name, int releaseYear, int recommendedAge, double price, String cast,ArrayList<String> subtitleLanguages)
+    __Setters__
+    + void setCast(String cast)
+    + void setSubtitleLanguages(ArrayList<String> subtitleLanguages)
+    __Getters__
+    + String getCast()
+    + ArrayList<String> getSubtitleLanguages()
+}
+Movie --|> Item
+
+Class Track{
+    __Attributes__
+    - String name
+    - ArrayList<Rating> ratings
+    __Constructor__
+    + Track(String name)
+    __Setters__
+    + void setName(String name)
+    __Getters__
+    + String getName()
+    + ArrayList<Rating> getRatings()
+    __Methods__
+    + void addRating(Rating rating)
+}
+Track --|> Item
+
+
+class Menu {
+    __Attributes__
+    # {static} RentalStore rental = new RentalStore();
+    - {static} Scanner input = new Scanner(System.in);
+    - {static} String userCPF;
+    __Methods__
+    - {static} int readInt()
+    + {static} int addProductMenu()
+    + {static} int deleteProductMenu()
+    + {static} int managerMenu()
+    + {static} int clientMenu()
+    - {static} boolean signIn()
+    - {static} boolean loan()
+    - {static} boolean returnItem()
+    + {static} boolean validateCPF(String cpf)
+
+
+
+}
+
+Class RentalStore{
+    __Attributes__
+    - ArrayList<Item> products;
+    - ArrayList<Client> clients;
+    __Constructor__
+    + RentalStore()
+    __Getters__
+    + ArrayList<Item> getProducts()
+    + ArrayList<Client> getClients()
+    __Methods__
+    + boolean addProduct(Item item)
+    + Item removeProduct(Item item)
+    + boolean addClient(Client client)
+    + Client removeClient(Client client)
+    + boolean alreadySigned(String cpf)
+    + Client searchClient(String cpf)
+    + String toString()
+
+}
+
+
+@enduml

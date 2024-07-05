@@ -6,8 +6,7 @@ public class Movie extends Item {
     private String cast;
     private ArrayList<String> subtitleLanguages;
 
-    public Movie(int quantity, String name, int releaseYear, int recommendedAge, double price, String cast,
-            ArrayList<String> subtitleLanguages) {
+    public Movie(int quantity, String name, int releaseYear, int recommendedAge, double price, String cast,ArrayList<String> subtitleLanguages) {
         super(quantity, name, releaseYear, recommendedAge, price);
         this.cast = cast;
         this.subtitleLanguages = subtitleLanguages;

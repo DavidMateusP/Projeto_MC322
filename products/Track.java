@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import client.Rating;
 
 public class Track {
-    String name;
-    ArrayList<Rating> ratings;
+    private String name;
+    private ArrayList<Rating> ratings;
 
     public Track(String name) {
         this.name = name;
