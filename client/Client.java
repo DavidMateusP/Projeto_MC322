@@ -9,9 +9,9 @@ public class Client implements Serializable {
     private static final long serialVersionUID = 302L;
     private double balance;
     private ArrayList<Loan> loans;
-    private String name;
-    private LocalDate birthDate;
-    private String cpf;
+    private final String name;
+    private final LocalDate birthDate;
+    private final String cpf;
 
     // Constructor method
     public Client(String name, LocalDate birthDate, String cpf) {
@@ -53,7 +53,8 @@ public class Client implements Serializable {
     }
 
     public void removeLoan(Loan loan) {
-        loans.remove(loan);
+        if (loans.contains(loan))
+            loans.remove(loan);
     }
 
     public boolean hasLateItems() {

@@ -11,7 +11,7 @@ public abstract class Item implements Serializable {
     private ArrayList<Loan> loans;
     private int quantity;
     private String name;
-    private int releaseYear;
+    private final int releaseYear;
     private int recommendedAge;
     private double price;
     private ArrayList<Rating> ratings;
@@ -33,7 +33,6 @@ public abstract class Item implements Serializable {
 
     public Rates getAverageRating() {
         return Rating.averageRating(ratings);
-
     }
 
     // Getters and Setters
@@ -46,16 +45,8 @@ public abstract class Item implements Serializable {
     }
 
     public void removeLoan(Loan loan) {
-        try {
-            if(loans.size() <= 0){
-                throw new IllegalAccessError("There is no loan.");
-            } else {
-                loans.remove(loan);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        if (loans.contains(loan))
+            loans.remove(loan);
     }
 
     public int getQuantity() {
@@ -80,10 +71,6 @@ public abstract class Item implements Serializable {
 
     public int getReleaseYear() {
         return releaseYear;
-    }
-
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
     }
 
     public int getRecommendedAge() {

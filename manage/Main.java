@@ -7,13 +7,16 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
         int option = 0;
+
+        // TODO: Interface
+
         System.out.println("Welcome to our rental store service!\n");
         do {
-            try{
+            try {
                 System.out.println("\tChoose a profile:\n"
-                    + "\t\t[1] Manager\n"
-                    + "\t\t[2] Client\n"
-                    + "\t\t[3] Exit\n");
+                        + "\t\t[1] Manager\n"
+                        + "\t\t[2] Client\n"
+                        + "\t\t[3] Exit\n");
                 option = Integer.parseInt(input.nextLine());
                 switch (option) {
                     case 1:
@@ -28,9 +31,9 @@ public class Main {
                     default:
                         System.out.println("Invalid option, please try again.");
                 }
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("The option must be an integer.");
-            } 
+            }
         } while (option != 3);
         input.close();
 

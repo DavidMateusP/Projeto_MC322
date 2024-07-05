@@ -48,11 +48,10 @@ public class Menu {
                     + "\t\t[5] Back");
             try {
                 option = readInt();
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("The option must be an integer.");
             }
 
-            
             if (option >= 1 && option <= 4) {
                 System.out.println("\tEnter name:");
                 name = input.nextLine();
@@ -301,7 +300,7 @@ public class Menu {
             if (item.getName().equals(product)) {
                 if (item.getAvailableQuantity() > 0) {
                     // There is an available item
-                    if (Loan.newLoan(client, item)) {
+                    if (Loan.newLoan(client, item).equals("Sucesso")) {
                         return true;
                     } else {
                         return false;

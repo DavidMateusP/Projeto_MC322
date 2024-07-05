@@ -7,7 +7,7 @@ public enum Rates {
     BAD(4),
     VERY_BAD(2);
 
-    double value;
+    private final double value;
 
     Rates(double value) {
         this.value = value;
