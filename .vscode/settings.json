@@ -1,0 +1,14 @@
+{
+    "java.project.referencedLibraries": [
+      "libs/swingx-all-1.6.5-1.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx.base.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx.controls.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx.fxml.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx.graphics.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx.media.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx.swing.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx.web.jar",
+      "librar/javafx-sdk-22.0.1/lib/javafx-swt.jar"
+    ]
+  }
+  

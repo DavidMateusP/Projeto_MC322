@@ -2,6 +2,10 @@ package manage;
 
 import java.util.Scanner;
 
+import manage.Demo;
+import manage.Menu;
+
+
 public class Main {
     public static void main(String[] args) {
 
@@ -9,6 +13,7 @@ public class Main {
         int option = 0;
 
         // TODO: Interface
+        Demo d = new Demo();
 
         System.out.println("Welcome to our rental store service!\n");
         do {
