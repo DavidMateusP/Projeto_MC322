@@ -181,7 +181,7 @@ public class Menu {
                     System.out.println("Invalid Option!\n" + "\t\t\t:(\n");
             }
 
-        } while (option != 3);
+        } while (option != 5);
         return 0;
     }
 
@@ -218,7 +218,7 @@ public class Menu {
                 default:
                     System.err.println("Invalid Option!\n" + "\t\t\t:(\n");
             }
-        } while (option != 4);
+        } while (option != 5);
 
         return 0;
     }
@@ -266,10 +266,11 @@ public class Menu {
         System.out.println("\nPlease enter birthday (DD/MM/YYYY):");
         String birthday = input.nextLine();
 
-        int day = Integer.parseInt(birthday.substring(0, 1));
-        Month month = Month.of(Integer.parseInt(birthday.substring(3, 4)));
-        int year = Integer.parseInt(birthday.substring(6));
-        LocalDate birthdate = LocalDate.of(day, month, year);
+        String[] parts = birthday.split("/");
+        int day = Integer.parseInt(parts[0]);
+        Month month =Month.of(Integer.parseInt(parts[1]));
+        int year = Integer.parseInt(parts[2]);
+        LocalDate birthdate = LocalDate.of(year, month, day);
 
         // Instantiantes and inicializes Client object
         Client client = new Client(name, birthdate, cpf);
