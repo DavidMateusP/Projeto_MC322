@@ -2,6 +2,9 @@ package manage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -11,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class rentController {
 
@@ -60,11 +64,23 @@ public class rentController {
 
     @FXML
     void deleteAccount(ActionEvent event) {
-
+        RentalStore.setCurrentClient(null);
+        RentalStore.removeClient(client);
+        Parent signInParent = FXMLLoader.load(getClass().getResource("loginMenu.fxml"));
+        Scene signInScene = new Scene(signInParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(signInScene);
+        window.show();
     }
 
     @FXML
     void exit(ActionEvent event) {
+        RentalStore.setCurrentClient(null);
+        Parent signInParent = FXMLLoader.load(getClass().getResource("loginMenu.fxml"));
+        Scene signInScene = new Scene(signInParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(signInScene);
+        window.show();
 
     }
 

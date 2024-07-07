@@ -1,9 +1,12 @@
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import manage.RentalStore;
 
 public class signInController {
 
@@ -35,10 +38,10 @@ public class signInController {
     void verifyLogin(ActionEvent event) {
         String cpf = this.cpf.getText();
         if (!isCPFRegistered(cpf)) {
-            System.err.println("You are not signed up yet. Please create an account!");
+            JOptionPane.showMessageDialog(null, "You are not signed up yet. Please create an account!");
         }
         else if (cpf.equalsIgnoreCase("admin")) {
-            System.out.println("Admin signed in successfully!");
+            JOptionPane.showMessageDialog(null, "Admin signed in successfully!");
             Parent adminParent = FXMLLoader.load(getClass().getResource("adminMenu.fxml"));
             Scene adminScene = new Scene(adminParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -48,6 +51,8 @@ public class signInController {
 
         else{
             System.out.println("Signed in successfully!");
+            JOptionPane.showMessageDialog(null, "Signed in successfully!");
+            RentalStore.setCurrentClient(RentalStore.searchClient(cpf));
             Parent alugarParent = FXMLLoader.load(getClass().getResource("clientMenuAlugar.fxml"));
             Scene alugarScene = new Scene(alugarParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -12,6 +12,15 @@ public class RentalStore {
     private static final String clientsFile = "clients.dat";
     private static boolean productsFileCreated = createsFile(productsFile);
     private static boolean clientsFileCreated = createsFile(clientsFile);
+    private static Client currentClient = null;
+
+    public static Client getCurrentClient() {
+        return currentClient;
+    }
+    
+    public static void setCurrentClient(Client client) {
+        currentClient = client;
+    }
 
     public static ArrayList<Item> getProducts() {
         return products;
@@ -60,7 +69,7 @@ public class RentalStore {
             if (index < 0) {
                 throw new IllegalArgumentException("This client was not found.");
             } else {
-                removed = clients.remove(this.clients.indexOf(client));
+                removed = clients.remove(clients.indexOf(client));
                 clientsToFile();
                 return removed;
             }

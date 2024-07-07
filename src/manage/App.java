@@ -35,7 +35,7 @@ public class App extends Application{
     public void start(Stage primaryStage) throws Exception{
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("test1.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginMenu.fxml"));
         Parent root = fxmlLoader.load();
         Scene tela = new Scene(root);
         

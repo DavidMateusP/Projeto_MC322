@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import client.Client;
 import products.Album;
 import products.BoardGame;
@@ -15,12 +18,16 @@ import client.Loan;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class signUpController {
 
@@ -50,14 +57,19 @@ public class signUpController {
         LocalDate birthdateValue = birthdate.getValue();
         Client client = new Client(name, birthdate, cpf);
         if (isCPFRegistered(cpf)) {
-            System.out.println("CPF already exists in the database.");
+            JOptionPane.showMessageDialog(null, "CPF already exists in the database.");
         } else {
             RentalStore.addClient(client);
-            System.out.println("Client account created successfully!");
+            JOptionPane.showMessageDialog(null, "Client account created successfully!");
             System.out.println("Name: " + name);
             System.out.println("CPF: " + cpf);
             System.out.println("Birthdate: " + birthdateValue);
         }
+        Parent signInParent = FXMLLoader.load(getClass().getResource("loginMenu.fxml"));
+        Scene signInScene = new Scene(signInParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(signInScene);
+        window.show();
     }
 
     private boolean isCPFRegistered(String cpf) {

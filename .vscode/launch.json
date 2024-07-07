@@ -6,10 +6,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "manage.App",
+            "projectName": "Projeto_MC322_7c3ea91a"
+        },
+        {
+            "type": "java",
             "name": "Launch App",
             "request": "launch",
             "mainClass": "src.manage.Main",
-            "vmArgs": "--module-path javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }
