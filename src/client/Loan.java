@@ -2,6 +2,8 @@ package client;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 
 import products.Item;
 
@@ -12,7 +14,7 @@ public class Loan {
     private boolean renewed;
 
     // Constructor
-    private Loan(Client client, Item item, LocalDate deadline) {
+    public Loan(Client client, Item item, LocalDate deadline) {
         this.client = client;
         this.item = item;
         this.deadline = deadline;
@@ -148,5 +150,15 @@ public class Loan {
         }
         return "O item foi devolvido";
 
+    }
+
+    public boolean isCurrentWeek(){
+        LocalDate today = LocalDate.now();
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        
+        int currentWeek = today.get(weekFields.weekOfWeekBasedYear());
+        int givenWeek = deadline.get(weekFields.weekOfWeekBasedYear());
+        
+        return currentWeek == givenWeek && today.getYear() == deadline.getYear();
     }
 }
