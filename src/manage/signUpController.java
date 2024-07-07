@@ -52,7 +52,7 @@ public class signUpController {
         if (isCPFRegistered(cpf)) {
             System.out.println("CPF already exists in the database.");
         } else {
-            rental.addClient(client);
+            RentalStore.addClient(client);
             System.out.println("Client account created successfully!");
             System.out.println("Name: " + name);
             System.out.println("CPF: " + cpf);

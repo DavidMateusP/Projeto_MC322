@@ -6,37 +6,32 @@ import products.Item;
 import client.Client;
 
 public class RentalStore {
-    private ArrayList<Item> products;
-    private ArrayList<Client> clients;
+    private static ArrayList<Item> products = new ArrayList<Item>();;
+    private static ArrayList<Client> clients = new ArrayList<Client>();
     private static final String productsFile = "products.dat";
     private static final String clientsFile = "clients.dat";
+    private static boolean productsFileCreated = createsFile(productsFile);
+    private static boolean clientsFileCreated = createsFile(clientsFile);
 
-    public RentalStore() {
-        this.products = new ArrayList<Item>();
-        this.clients = new ArrayList<Client>();
-        createsFile(productsFile);
-        createsFile(clientsFile);
-    }
-
-    public ArrayList<Item> getProducts() {
+    public static ArrayList<Item> getProducts() {
         return products;
     }
 
-    public boolean addProduct(Item item) {
-        boolean added = this.products.add(item);
+    public static boolean addProduct(Item item) {
+        boolean added = products.add(item);
         // if the product was propperly added to the array, it is included in the file
         productsToFile();
         return added;
     }
 
-    public Item removeProduct(Item item) {
+    public static Item removeProduct(Item item) {
         Item removed = null;
         try {
-            int index = this.products.indexOf(item);
+            int index = products.indexOf(item);
             if (index < 0) {
                 throw new IllegalArgumentException("This product was not found.");
             } else {
-                removed = this.products.remove(index);
+                removed = products.remove(index);
                 productsToFile();
                 return removed;
             } 
@@ -47,25 +42,25 @@ public class RentalStore {
         }  
     }
 
-    public ArrayList<Client> getClients() {
+    public static ArrayList<Client> getClients() {
         return clients;
     }
 
-    public boolean addClient(Client client) {
-        boolean added = this.clients.add(client);
+    public static boolean addClient(Client client) {
+        boolean added = clients.add(client);
         // if the client was propperly added to the array, it is included in the file
         clientsToFile();
         return added;
     }
 
-    public Client removeClient(Client client) {
+    public static Client removeClient(Client client) {
         Client removed = null;
         try {
-            int index = this.clients.indexOf(client);
+            int index = clients.indexOf(client);
             if (index < 0) {
                 throw new IllegalArgumentException("This client was not found.");
             } else {
-                removed = this.clients.remove(this.clients.indexOf(client));
+                removed = clients.remove(this.clients.indexOf(client));
                 clientsToFile();
                 return removed;
             }
@@ -75,7 +70,7 @@ public class RentalStore {
         }
     }
 
-    public boolean alreadySigned(String cpf) {
+    public static boolean alreadySigned(String cpf) {
         for (Client client : clients) {
             if (client.getCpf().equals(cpf)) {
                 // client is already signed in the rental store
@@ -87,7 +82,7 @@ public class RentalStore {
         return false;
     }
 
-    public Client searchClient(String cpf) {
+    public static Client searchClient(String cpf) {
         for (Client client : clients) {
             if (client.getCpf().equals(cpf)) {
                 // found the client by their CPF
@@ -100,19 +95,19 @@ public class RentalStore {
     @Override
     public String toString() {
         String list = "Rental Store\n\tProducts:\t";
-        for (int i = 0; i < this.products.size(); i++) {
-            list += "\t\t- " + this.products.get(i).getName()
-                    + " (" + this.products.get(i).getQuantity() + ") "
-                    + this.products.get(i).getPrice() + "\n";
+        for (int i = 0; i < products.size(); i++) {
+            list += "\t\t- " + products.get(i).getName()
+                    + " (" + products.get(i).getQuantity() + ") "
+                    + products.get(i).getPrice() + "\n";
         }
         list += "\tClients:\n";
-        for (int i = 0; i < this.clients.size(); i++) {
-            list += "\t\t- " + this.clients.get(i).getName() + "\n";
+        for (int i = 0; i < clients.size(); i++) {
+            list += "\t\t- " + clients.get(i).getName() + "\n";
         }
         return list;
     }
 
-    protected void productsToFile() {
+    protected static void productsToFile() {
         try {
             try(FileOutputStream out = new FileOutputStream(productsFile);
             ObjectOutputStream obj = new ObjectOutputStream(out)) {
@@ -125,7 +120,7 @@ public class RentalStore {
         }
     }
 
-    protected void clientsToFile() {
+    protected static void clientsToFile() {
         try {
             //garantees that the file is not overwriten everytime a new client is added
             try(
@@ -143,7 +138,7 @@ public class RentalStore {
     }
 
     // reads the products from the file products_file into the array
-    protected void productsFromFile() {
+    protected static void productsFromFile() {
         int i = 0;
         ArrayList<Item> tempArray = new ArrayList<>();
         try {
@@ -169,14 +164,14 @@ public class RentalStore {
         } catch(IOException ex) {
             ex.printStackTrace();
         } finally {
-            this.products.clear();
-            this.products.addAll(tempArray);
+            products.clear();
+            products.addAll(tempArray);
         }
         
     }
 
     // reads the products from the file products_file into the array
-    protected void clientsFromFile() {
+    protected static void clientsFromFile() {
         int i=0;
         ArrayList<Client> tempArray = new ArrayList<>();
         try {
@@ -200,20 +195,22 @@ public class RentalStore {
         } catch(IOException ex) {
             ex.printStackTrace();
         } finally {
-            this.clients.clear();
-            this.clients.addAll(tempArray);
+            clients.clear();
+            clients.addAll(tempArray);
         }
     }
 
-    protected void createsFile(String name) {
+    protected static boolean createsFile(String name) {
         File file = new File(name);
         if (!file.exists()) {
             try {
                 file.createNewFile();
+                return true;
             } catch (IOException e) {
                 System.out.println(e.getMessage());
+                return false;
             }
         }
+        return true;
     }
-
 }

@@ -37,7 +37,7 @@ public class signInController {
         if (!isCPFRegistered(cpf)) {
             System.err.println("You are not signed up yet. Please create an account!");
         }
-        else if (cpf = "admin") {
+        else if (cpf.equalsIgnoreCase("admin")) {
             System.out.println("Admin signed in successfully!");
             Parent adminParent = FXMLLoader.load(getClass().getResource("adminMenu.fxml"));
             Scene adminScene = new Scene(adminParent);
@@ -45,7 +45,7 @@ public class signInController {
             window.setScene(adminScene);
             window.show();
         }
-        
+
         else{
             System.out.println("Signed in successfully!");
             Parent alugarParent = FXMLLoader.load(getClass().getResource("clientMenuAlugar.fxml"));
