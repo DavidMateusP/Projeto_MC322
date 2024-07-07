@@ -1,6 +1,6 @@
 {
     "java.project.referencedLibraries": [
-    
+        "lib/**/*.jar",
         "javafx-sdk-22.0.1/lib/javafx.base.jar",
         "javafx-sdk-22.0.1/lib/javafx.controls.jar",
         "javafx-sdk-22.0.1/lib/javafx.fxml.jar",
@@ -8,6 +8,14 @@
         "javafx-sdk-22.0.1/lib/javafx.media.jar",
         "javafx-sdk-22.0.1/lib/javafx.swing.jar",
         "javafx-sdk-22.0.1/lib/javafx.web.jar",
-        "javafx-sdk-22.0.1/lib/javafx-swt.jar"
+        "javafx-sdk-22.0.1/lib/javafx-swt.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx.base.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx.controls.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx.fxml.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx.graphics.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx.media.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx.swing.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx.web.jar",
+        "/home/biabuarque/Desktop/javafx-sdk-22.0.1/lib/javafx-swt.jar"
     ]
 }
