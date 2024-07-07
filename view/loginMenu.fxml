@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="signInController">
+  <children>
+    <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <items>
+        <AnchorPane minHeight="551.0" minWidth="520.0" prefHeight="551.0" prefWidth="520.0">
+          <children>
+                  <Accordion layoutX="10.0" layoutY="35.0" />
+              <ScrollPane layoutX="-212.0" layoutY="-8.0" prefHeight="-1.0" prefWidth="-1.0">
+                     <content>
+                    <Pane prefHeight="-1.0" prefWidth="-1.0" />
+                     </content>
+              </ScrollPane>
+                  <Label layoutX="364.0" layoutY="202.0" />
+                  <Label layoutX="449.0" layoutY="119.0" text="Login">
+                     <font>
+                        <Font name="Ubuntu Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <PasswordField layoutX="449.0" layoutY="297.0" prefHeight="29.0" prefWidth="294.0">
+                     <font>
+                        <Font name="Ubuntu Mono" size="20.0" />
+                     </font>
+                  </PasswordField>
+                  <TextField layoutX="449.0" layoutY="202.0" prefHeight="33.0" prefWidth="294.0">
+                     <font>
+                        <Font name="Ubuntu" size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="449.0" layoutY="174.0" text="Nome de usuario">
+                     <font>
+                        <Font name="Ubuntu" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="449.0" layoutY="268.0" text="CPF">
+                     <font>
+                        <Font name="Ubuntu" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="449.0" layoutY="374.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="159.0" text="Entrar" />
+                  <Label layoutX="496.0" layoutY="271.0" text="apenas os numeros" textFill="#00000057">
+                     <font>
+                        <Font name="Ubuntu" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="59.0" layoutY="119.0" text="Bem vindo">
+                     <font>
+                        <Font name="Ubuntu Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="59.0" layoutY="269.0" text="RentalStore!">
+                     <font>
+                        <Font name="Ubuntu Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="59.0" layoutY="190.0" text="ao sistema">
+                     <font>
+                        <Font name="Ubuntu Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="27.0" prefWidth="900.0" />
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+          <textFill>
+            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
+          </textFill>
+        </Label>
+        <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  <AnchorPane />
+  </children>
+</VBox>
