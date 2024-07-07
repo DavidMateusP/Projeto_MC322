@@ -120,19 +120,25 @@ public class RentalStore {
 
     protected void productsToFile(Item product) {
         try {
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(productsFile));
-            output.writeObject(product);
-            output.close();
-        } catch(IOException ex) {
-            ex.printStackTrace();
+            try(FileOutputStream out = new FileOutputStream(productsFile, true);
+            ObjectOutputStream obj = new ObjectOutputStream(out)) {
+                obj.writeObject(product);
+            }    
+            //obj.close();
+        } catch (IOException err) {
+            err.printStackTrace();
         }
     }
 
     protected void clientsToFile(Client client) {
         try {
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(clientsFile));
-            output.writeObject(client);
-            output.close();
+            //garantees that the file is not overwriten everytime a new client is added
+            try(
+                FileOutputStream f = new FileOutputStream(clientsFile, true);
+                ObjectOutputStream output = new ObjectOutputStream(f)) {
+                    output.writeObject(client);
+                    //output.close();
+                }
         } catch(IOException ex) {
             ex.printStackTrace();
         }
@@ -142,15 +148,17 @@ public class RentalStore {
     protected void productsFromFile() {
         int i = 0;
         try {
-            @SuppressWarnings("resource")
-            ObjectInputStream input = new ObjectInputStream(new FileInputStream(productsFile));
-            while(true) {
-                Item p = (Item) input.readObject();
-                System.out.println("Lendo o produto "+ (++i));
-                System.out.println(p.getLoans()+ "\n" + p.getQuantity()+ "\n" + p.getName() + "\n" + p.getReleaseYear() + "\n" + p.getRecommendedAge() + "\n" + p.getPrice() + "\n" + p.getRatings());
-            }
-            
-            
+            try(ObjectInputStream input = new ObjectInputStream(new FileInputStream(productsFile));) {
+       
+                while(true) {
+                    Item p = (Item) input.readObject();
+                    System.out.println("Lendo o produto "+ (++i));
+                    System.out.println("Produto: " + p.getName()+ "\n" + "Quantidade: " + p.getQuantity()+ "\n" + 
+                                        "Available: " + p.getAvailableQuantity() + "\n" + "Release Year: " + p.getReleaseYear() +
+                                        "\n" + "Recommended Age: " + p.getRecommendedAge() + "\n" + "Price: $" + p.getPrice() + "\n" +
+                                        "Rating: " + p.getAverageRating() + "\n");
+                }
+            } 
         } catch (EOFException endOfFileException) {
             return;
         } catch (ClassNotFoundException classNotFoundException) {
@@ -169,8 +177,9 @@ public class RentalStore {
             ObjectInputStream input = new ObjectInputStream(new FileInputStream(clientsFile));
             while(true) {
                 Client c = (Client) input.readObject();
-                System.out.println("Lendo o cliente "+ (++i));
-                System.out.println(c.getBalance()+ "\n" + c.getLoans()+ "\n" + c.getName() + "\n" + c.getAge() + "\n" + c.getCpf());
+                System.out.println("Reading client "+ (++i));
+                System.out.println("Client: " + c.getName()+ "\n" + "CPF: " + c.getCpf()+ "\n" + 
+                                        "Age: " + c.getAge() + "\n" + "Balance: $" + c.getBalance());
             }
         } catch (EOFException endOfFileException) {
             return;
@@ -179,12 +188,6 @@ public class RentalStore {
         } catch(IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    // saves data to file
-    protected void loadsData() {
-        productsFromFile();
-        clientsFromFile();
     }
 
     protected void createsFile(String name) {

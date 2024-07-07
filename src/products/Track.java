@@ -1,10 +1,11 @@
 package products;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import client.Rating;
 
-public class Track {
+public class Track implements Serializable{
     String name;
     ArrayList<Rating> ratings;
 
