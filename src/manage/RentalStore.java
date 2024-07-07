@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import products.Item;
 import client.Client;
 
-public class RentalStore {
+public abstract class RentalStore {
     private static ArrayList<Item> products = new ArrayList<Item>();;
     private static ArrayList<Client> clients = new ArrayList<Client>();
     private static final String productsFile = "products.dat";
     private static final String clientsFile = "clients.dat";
-    private static boolean productsFileCreated = createsFile(productsFile);
-    private static boolean clientsFileCreated = createsFile(clientsFile);
+    // private static boolean productsFileCreated = createsFile(productsFile);
+    // private static boolean clientsFileCreated = createsFile(clientsFile);
     private static Client currentClient = null;
 
     public static Client getCurrentClient() {
         return currentClient;
     }
-    
+
     public static void setCurrentClient(Client client) {
         currentClient = client;
     }
@@ -43,12 +43,12 @@ public class RentalStore {
                 removed = products.remove(index);
                 productsToFile();
                 return removed;
-            } 
+            }
             // return this.products.remove(this.products.indexOf(item));
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return removed;
-        }  
+        }
     }
 
     public static ArrayList<Client> getClients() {
@@ -118,12 +118,12 @@ public class RentalStore {
 
     protected static void productsToFile() {
         try {
-            try(FileOutputStream out = new FileOutputStream(productsFile);
-            ObjectOutputStream obj = new ObjectOutputStream(out)) {
-                for(Item product : products) {
+            try (FileOutputStream out = new FileOutputStream(productsFile);
+                    ObjectOutputStream obj = new ObjectOutputStream(out)) {
+                for (Item product : products) {
                     obj.writeObject(product);
                 }
-            }    
+            }
         } catch (IOException err) {
             err.printStackTrace();
         }
@@ -131,17 +131,17 @@ public class RentalStore {
 
     protected static void clientsToFile() {
         try {
-            //garantees that the file is not overwriten everytime a new client is added
-            try(
-                FileOutputStream f = new FileOutputStream(clientsFile);
-                ObjectOutputStream output = new ObjectOutputStream(f)) {
-                    for(Client client : clients) {
-                        output.writeObject(client);
-                    }
-                    
-                    //output.close();
+            // garantees that the file is not overwriten everytime a new client is added
+            try (
+                    FileOutputStream f = new FileOutputStream(clientsFile);
+                    ObjectOutputStream output = new ObjectOutputStream(f)) {
+                for (Client client : clients) {
+                    output.writeObject(client);
                 }
-        } catch(IOException ex) {
+
+                // output.close();
+            }
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -151,57 +151,59 @@ public class RentalStore {
         int i = 0;
         ArrayList<Item> tempArray = new ArrayList<>();
         try {
-            try(ObjectInputStream input = new ObjectInputStream(new FileInputStream(productsFile));) {
-       
-                while(true) {
+            try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(productsFile));) {
+
+                while (true) {
                     try {
                         Item p = (Item) input.readObject();
                         tempArray.add(p);
-                        System.out.println("Reading product "+ (++i));
-                        System.out.println("Product: " + p.getName()+ "\n" + "Quantity: " + p.getQuantity()+ "\n" + 
-                                        "Available: " + p.getAvailableQuantity() + "\n" + "Release Year: " + p.getReleaseYear() +
-                                        "\n" + "Recommended Age: " + p.getRecommendedAge() + "\n" + "Price: $" + p.getPrice() + "\n" +
-                                        "Rating: " + p.getAverageRating() + "\n");
+                        System.out.println("Reading product " + (++i));
+                        System.out.println("Product: " + p.getName() + "\n" + "Quantity: " + p.getQuantity() + "\n" +
+                                "Available: " + p.getAvailableQuantity() + "\n" + "Release Year: " + p.getReleaseYear()
+                                +
+                                "\n" + "Recommended Age: " + p.getRecommendedAge() + "\n" + "Price: $" + p.getPrice()
+                                + "\n" +
+                                "Rating: " + p.getAverageRating() + "\n");
                     } catch (EOFException e) {
-                        System.out.println(e.getMessage());  
-                        break; 
-                    }       
-                }
-            } 
-        } catch (ClassNotFoundException classNotFoundException) {
-            System.exit(1);
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            products.clear();
-            products.addAll(tempArray);
-        }
-        
-    }
-
-    // reads the products from the file products_file into the array
-    protected static void clientsFromFile() {
-        int i=0;
-        ArrayList<Client> tempArray = new ArrayList<>();
-        try {
-            try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(clientsFile))) {
-            
-                while(true) {
-                    try {
-                        Client c = (Client) input.readObject();
-                    tempArray.add(c);
-                    System.out.println("Reading client "+ (++i));
-                    System.out.println("Client: " + c.getName()+ "\n" + "CPF: " + c.getCpf()+ "\n" + 
-                                            "Age: " + c.getAge() + "\n" + "Balance: $" + c.getBalance());
-                    } catch (EOFException e) {
-                        System.out.println(e.getMessage());  
+                        System.out.println(e.getMessage());
                         break;
                     }
                 }
             }
         } catch (ClassNotFoundException classNotFoundException) {
             System.exit(1);
-        } catch(IOException ex) {
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            products.clear();
+            products.addAll(tempArray);
+        }
+
+    }
+
+    // reads the products from the file products_file into the array
+    protected static void clientsFromFile() {
+        int i = 0;
+        ArrayList<Client> tempArray = new ArrayList<>();
+        try {
+            try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(clientsFile))) {
+
+                while (true) {
+                    try {
+                        Client c = (Client) input.readObject();
+                        tempArray.add(c);
+                        System.out.println("Reading client " + (++i));
+                        System.out.println("Client: " + c.getName() + "\n" + "CPF: " + c.getCpf() + "\n" +
+                                "Age: " + c.getAge() + "\n" + "Balance: $" + c.getBalance());
+                    } catch (EOFException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
+                }
+            }
+        } catch (ClassNotFoundException classNotFoundException) {
+            System.exit(1);
+        } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
             clients.clear();

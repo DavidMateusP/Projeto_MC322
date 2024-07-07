@@ -8,28 +8,16 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import client.Client;
-import products.Album;
-import products.BoardGame;
-import products.Book;
-import products.Item;
-import products.Movie;
-import products.Track;
-import client.Loan;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
-public class signUpController {
+public class signUpController extends Controller {
 
     @FXML
     private DatePicker birthdate;
@@ -39,7 +27,6 @@ public class signUpController {
 
     @FXML
     private Button doneButton;
-
 
     @FXML
     private TextField username;
@@ -55,7 +42,7 @@ public class signUpController {
         String name = this.username.getText();
         String cpf = this.cpf.getText();
         LocalDate birthdateValue = birthdate.getValue();
-        Client client = new Client(name, birthdate, cpf);
+        Client client = new Client(name, birthdateValue, cpf);
         if (isCPFRegistered(cpf)) {
             JOptionPane.showMessageDialog(null, "CPF already exists in the database.");
         } else {
@@ -65,11 +52,7 @@ public class signUpController {
             System.out.println("CPF: " + cpf);
             System.out.println("Birthdate: " + birthdateValue);
         }
-        Parent signInParent = FXMLLoader.load(getClass().getResource("loginMenu.fxml"));
-        Scene signInScene = new Scene(signInParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signInScene);
-        window.show();
+        showScene("loginMenu.fxml", event);
     }
 
     private boolean isCPFRegistered(String cpf) {
@@ -91,4 +74,3 @@ public class signUpController {
     }
 
 }
-

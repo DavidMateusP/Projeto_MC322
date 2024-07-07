@@ -1,3 +1,9 @@
+package manage;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
@@ -6,9 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import manage.RentalStore;
 
-public class signInController {
+public class signInController extends Controller {
 
     @FXML
     private PasswordField cpf;
@@ -27,11 +32,7 @@ public class signInController {
 
     @FXML
     void showSignUp(ActionEvent event) {
-        Parent signUpParent = FXMLLoader.load(getClass().getResource("registerMenu.fxml"));
-        Scene signUpScene = new Scene(signUpParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signUpScene);
-        window.show();
+        showScene("registerMenu.fxml", event);
     }
 
     @FXML
@@ -39,25 +40,14 @@ public class signInController {
         String cpf = this.cpf.getText();
         if (!isCPFRegistered(cpf)) {
             JOptionPane.showMessageDialog(null, "You are not signed up yet. Please create an account!");
-        }
-        else if (cpf.equalsIgnoreCase("admin")) {
+        } else if (cpf.equalsIgnoreCase("admin")) {
             JOptionPane.showMessageDialog(null, "Admin signed in successfully!");
-            Parent adminParent = FXMLLoader.load(getClass().getResource("adminMenu.fxml"));
-            Scene adminScene = new Scene(adminParent);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(adminScene);
-            window.show();
-        }
-
-        else{
+            showScene("adminMenu.fxml", event);
+        } else {
             System.out.println("Signed in successfully!");
             JOptionPane.showMessageDialog(null, "Signed in successfully!");
             RentalStore.setCurrentClient(RentalStore.searchClient(cpf));
-            Parent alugarParent = FXMLLoader.load(getClass().getResource("clientMenuAlugar.fxml"));
-            Scene alugarScene = new Scene(alugarParent);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(alugarScene);
-            window.show();
+            showScene("clientMenuAlugar.fxml", event);
         }
     }
 

@@ -1,5 +1,6 @@
 package manage;
-import java.lang.classfile.instruction.ConstantInstruction.LoadConstantInstruction;
+
+//import java.lang.classfile.instruction.ConstantInstruction.LoadConstantInstruction;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
@@ -24,7 +24,7 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import products.Item;
 
-public class adminController implements Initializable{
+public class adminController implements Initializable {
 
     @FXML
     private ChoiceBox<String> filterMenu;
@@ -64,44 +64,44 @@ public class adminController implements Initializable{
 
     }
 
-    public static void formatTextLoan(ListView<Loan> list){
-        list.setCellFactory(new Callback<ListView<Loan>,ListCell<Loan>>() {
+    public static void formatTextLoan(ListView<Loan> list) {
+        list.setCellFactory(new Callback<ListView<Loan>, ListCell<Loan>>() {
             @Override
-            public ListCell<Loan> call(ListView<Loan> param){
-                return new ListCell<Loan>(){
+            public ListCell<Loan> call(ListView<Loan> param) {
+                return new ListCell<Loan>() {
                     @Override
-                    protected void updateItem(Loan loan, boolean empty){
+                    protected void updateItem(Loan loan, boolean empty) {
                         super.updateItem(loan, empty);
-                        if (empty || loan == null){
+                        if (empty || loan == null) {
                             setText(null);
-                        }else{
+                        } else {
                             setText(loan.getClient().getName() + ", " + loan.getItem().getName());
-                }
-            }
-        };
+                        }
+                    }
+                };
             }
         });
     }
 
-
-    public static void formatTextItem(ListView<Item> list){
-        list.setCellFactory(new Callback<ListView<Item>,ListCell<Item>>() {
+    public static void formatTextItem(ListView<Item> list) {
+        list.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
             @Override
-            public ListCell<Item> call(ListView<Item> param){
-                return new ListCell<Item>(){
+            public ListCell<Item> call(ListView<Item> param) {
+                return new ListCell<Item>() {
                     @Override
-                    protected void updateItem(Item item, boolean empty){
+                    protected void updateItem(Item item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (empty || item == null){
+                        if (empty || item == null) {
                             setText(null);
-                        }else{
+                        } else {
                             setText(item.getName() + ", " + item.getClass().getName());
-                }
-            }
-        };
+                        }
+                    }
+                };
             }
         });
     }
+
     @FXML
     void searchItem(ActionEvent event) {
         String textsearch = searchTextInput.getText();
@@ -113,31 +113,31 @@ public class adminController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Define os itens no ListView
-        ArrayList<String> categories = new ArrayList<>(Arrays.asList("Sem Filtro", "Livros", "Filmes", "Álbuns", "BoardGames"));
+        ArrayList<String> categories = new ArrayList<>(
+                Arrays.asList("Sem Filtro", "Livros", "Filmes", "Álbuns", "BoardGames"));
         ObservableList<String> observableCategories = FXCollections.observableArrayList(categories);
-        
+
         filterMenu.setItems(observableCategories);
 
         listLoansOutDated.setItems(DataProvider.getOutDated());
-        listLoansOutDated.setCellFactory(new Callback<ListView<Loan>,ListCell<Loan>>() {
+        listLoansOutDated.setCellFactory(new Callback<ListView<Loan>, ListCell<Loan>>() {
             @Override
-            public ListCell<Loan> call(ListView<Loan> param){
-                return new ListCell<Loan>(){
+            public ListCell<Loan> call(ListView<Loan> param) {
+                return new ListCell<Loan>() {
                     @Override
-                    protected void updateItem(Loan loan, boolean empty){
+                    protected void updateItem(Loan loan, boolean empty) {
                         super.updateItem(loan, empty);
-                        if (empty || loan == null){
+                        if (empty || loan == null) {
                             setText(null);
-                        }else{
+                        } else {
                             setText(loan.getClient().getName() + ", " + loan.getItem().getName());
-                }
-            }
-        };
+                        }
+                    }
+                };
             }
         });
 
         nextLoansLists.setItems(DataProvider.getNextLoans());
-        
+
     }
 }
-    

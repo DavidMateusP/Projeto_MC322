@@ -15,7 +15,6 @@ import products.Track;
 import client.Loan;
 
 public class Menu {
-    protected static RentalStore rental = new RentalStore();
     private static Scanner input = new Scanner(System.in);
     private static String userCPF;
 
@@ -118,7 +117,7 @@ public class Menu {
                     System.out.println("Invalid Option!\n" + "\t\t\t:(\n");
                     continue;
             }
-            rental.addProduct(newProduct);
+            RentalStore.addProduct(newProduct);
             System.out.println("\tProduct added to stock! :)");
         } while (option != 5);
         return 0;
@@ -126,7 +125,7 @@ public class Menu {
 
     public static int deleteProductMenu() {
         String name;
-        int size = rental.getProducts().size();
+        int size = RentalStore.getProducts().size();
 
         if (size == 0) {
             System.out.println("\tThere is no product to delete.\n");
@@ -136,7 +135,7 @@ public class Menu {
         System.out.println("Type the name of the product you want to delete:");
         name = input.nextLine().trim();
         Item item = null;
-        for (Item i : rental.getProducts()) {
+        for (Item i : RentalStore.getProducts()) {
             if (i.getName() == name) {
                 item = i;
                 break;
@@ -145,7 +144,7 @@ public class Menu {
         if (item == null) {
             System.out.println("There is no item with the name '" + name + "'");
         } else {
-            rental.removeProduct(item);
+            RentalStore.removeProduct(item);
             System.out.println("Item removed");
         }
         return 0;
@@ -170,10 +169,10 @@ public class Menu {
                     deleteProductMenu();
                     break;
                 case 3: // Reads clients' file
-                    rental.clientsFromFile();
+                    RentalStore.clientsFromFile();
                     break;
                 case 4: // Reads products' file
-                    rental.productsFromFile();
+                    RentalStore.productsFromFile();
                     break;
                 case 5: // Back
                     break;
@@ -227,7 +226,7 @@ public class Menu {
         System.out.println("Please enter your cpf: ");
         String cpf = input.nextLine();
 
-        if (!rental.alreadySigned(cpf)) {
+        if (!RentalStore.alreadySigned(cpf)) {
             System.err.println("You are not signed up yet. Please create an account!");
             return false;
         }
@@ -268,20 +267,20 @@ public class Menu {
 
         String[] parts = birthday.split("/");
         int day = Integer.parseInt(parts[0]);
-        Month month =Month.of(Integer.parseInt(parts[1]));
+        Month month = Month.of(Integer.parseInt(parts[1]));
         int year = Integer.parseInt(parts[2]);
         LocalDate birthdate = LocalDate.of(year, month, day);
 
         // Instantiantes and inicializes Client object
         Client client = new Client(name, birthdate, cpf);
         // checks if this client is already signed up
-        if (rental.alreadySigned(cpf)) {
+        if (RentalStore.alreadySigned(cpf)) {
             System.err.println("There is already an account with this cpf.");
             return false;
         }
 
         // adds Client to the rental Store ArrayList of clients signed up
-        rental.addClient(client);
+        RentalStore.addClient(client);
 
         // Prints message of successful account creation
         System.out.println("Account successfully created!");
@@ -296,16 +295,16 @@ public class Menu {
             return false;
         }
 
-        Client client = rental.searchClient(userCPF);
+        Client client = RentalStore.searchClient(userCPF);
 
         System.out.println("Please, enter the name of the item you would like to borrow: ");
         String product = input.nextLine();
 
-        if (rental.getProducts().size() == 0) {
+        if (RentalStore.getProducts().size() == 0) {
             return false;
         }
 
-        for (Item item : rental.getProducts()) {
+        for (Item item : RentalStore.getProducts()) {
             if (item.getName().equals(product)) {
                 if (item.getAvailableQuantity() > 0) {
                     // There is an available item
@@ -331,7 +330,7 @@ public class Menu {
             return false;
         }
 
-        Client client = rental.searchClient(userCPF);
+        Client client = RentalStore.searchClient(userCPF);
 
         if (client.getLoans().isEmpty()) {
             return false;

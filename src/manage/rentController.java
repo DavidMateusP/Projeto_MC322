@@ -1,5 +1,8 @@
 package manage;
 
+import java.io.IOException;
+
+import client.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
-public class rentController {
+public class rentController extends Controller {
 
     @FXML
     private DatePicker date;
@@ -64,23 +68,26 @@ public class rentController {
 
     @FXML
     void deleteAccount(ActionEvent event) {
+        Client client = new Client(null, null, null);
         RentalStore.setCurrentClient(null);
         RentalStore.removeClient(client);
-        Parent signInParent = FXMLLoader.load(getClass().getResource("loginMenu.fxml"));
-        Scene signInScene = new Scene(signInParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signInScene);
-        window.show();
+        showScene("loginMenu.fxml", event);
+
     }
 
     @FXML
     void exit(ActionEvent event) {
         RentalStore.setCurrentClient(null);
-        Parent signInParent = FXMLLoader.load(getClass().getResource("loginMenu.fxml"));
-        Scene signInScene = new Scene(signInParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(signInScene);
-        window.show();
+        try {
+            Parent signInParent;
+            signInParent = FXMLLoader.load(getClass().getResource("loginMenu.fxml"));
+            Scene signInScene = new Scene(signInParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(signInScene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -115,4 +122,3 @@ public class rentController {
     }
 
 }
-
