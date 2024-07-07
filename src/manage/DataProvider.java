@@ -42,22 +42,14 @@ public class DataProvider {
         return nextLoan;
     }
 
-    public static ObservableList<Item> findItem(String filter, String textSeach) {
+    public static ObservableList<Item> findItem(String textSeach) {
         ObservableList<Item> search = FXCollections.observableArrayList();
-        if (!filter.equals("Sem Filtro")) {
-            for (Item i : itemList) {
-                if (i.getName().contains(textSeach) && i.getClass().getName().equals(filter)) {
-                    search.add(i);
-                }
-            }
-        } else {
-            for (Item i : itemList) {
-                if (i.getName().contains(textSeach)) {
-                    search.add(i);
-                }
+        for(Item item : itemList) {
+            // verifies if the item's name has the search text
+            if(item.getName().equalsIgnoreCase(textSeach)) {
+                search.add(item);
             }
         }
         return search;
     }
-
 }
