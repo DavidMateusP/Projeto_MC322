@@ -24,7 +24,7 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import products.Item;
 
-public class Admcontrol implements Initializable{
+public class adminController implements Initializable{
 
     @FXML
     private ChoiceBox<String> filterMenu;

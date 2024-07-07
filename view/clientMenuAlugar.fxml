@@ -58,24 +58,12 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Alugar">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Livro" />
-                  <MenuItem mnemonicParsing="false" text="Album" />
-                  <MenuItem mnemonicParsing="false" text="Jogo de Tabuleiro" />
-                  <MenuItem mnemonicParsing="false" text="Filme" />
-               </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Emprestimos">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Devolver" />
-                  <MenuItem mnemonicParsing="false" text="Consultar emprestimos" />
-               </items>
-        </Menu>
+        <Menu mnemonicParsing="false" text="Alugar" />
+        <Menu fx:id="emprestimos" mnemonicParsing="false" onAction="#showEmprestimos" text="Emprestimos" />
             <Menu mnemonicParsing="false" text="Conta">
               <items>
-                  <MenuItem mnemonicParsing="false" text="Excluir conta" />
-                <MenuItem mnemonicParsing="false" text="Sair" />
+                  <MenuItem fx:id="excluirContaOption" mnemonicParsing="false" onAction="#deleteAccount" text="Excluir conta" />
+                <MenuItem fx:id="sairOption" mnemonicParsing="false" onAction="#exit" text="Sair" />
               </items>
             </Menu>
       </menus>
@@ -91,7 +79,7 @@
                         <Font name="Ubuntu" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="135.0" layoutY="20.0" text="User">
+                  <Label fx:id="username" layoutX="135.0" layoutY="20.0" text="User">
                      <font>
                         <Font name="Ubuntu Bold" size="13.0" />
                      </font>
@@ -101,7 +89,7 @@
                     <Pane prefHeight="-1.0" prefWidth="-1.0" />
                      </content>
               </ScrollPane>
-                  <TextField layoutX="241.0" layoutY="96.0" />
+                  <TextField fx:id="itemName" layoutX="241.0" layoutY="96.0" />
                   <Label layoutX="364.0" layoutY="202.0" />
                   <Label layoutX="55.0" layoutY="100.0" text="Insira o nome do(a) item">
                      <font>
