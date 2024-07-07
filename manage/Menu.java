@@ -159,7 +159,9 @@ public class Menu {
             System.out.println("\tChoose an action:\n"
                     + "\t\t[1] Add product\n"
                     + "\t\t[2] Delete product\n"
-                    + "\t\t[3] Back\n");
+                    + "\t\t[3] Read Clients' Files\n"
+                    + "\t\t[4] Read Products' Files\n"
+                    + "\t\t[5] Back\n");
             option = Integer.parseInt(input.nextLine());
             switch (option) {
                 case 1: // Add Product
@@ -168,7 +170,13 @@ public class Menu {
                 case 2: // Delete product
                     deleteProductMenu();
                     break;
-                case 3: // Back
+                case 3: // Reads clients' file
+                    rental.clientsFromFile();
+                    break;
+                case 4: // Reads products' file
+                    rental.productsFromFile();
+                    break;
+                case 5: // Back
                     break;
                 default:
                     System.out.println("Invalid Option!\n" + "\t\t\t:(\n");

@@ -1,10 +1,12 @@
 package products;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import client.Rating;
 
-public class Track {
+public class Track implements Serializable{
+    private static final long serialVersionUID = 302l;
     private String name;
     private ArrayList<Rating> ratings;
 

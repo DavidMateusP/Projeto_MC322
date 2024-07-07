@@ -1,6 +1,6 @@
 package manage;
 
-import java.util.Scanner;
+import java.uti1.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,8 +33,6 @@ public class Main {
             } 
         } while (option != 3);
         input.close();
-
-        Menu.rental.productsFromFile();
 
     }
 }
