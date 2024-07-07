@@ -8,6 +8,13 @@
             "type": "java",
             "name": "App",
             "request": "launch",
+            "mainClass": "App",
+            "projectName": "Projeto_MC322_7c3ea91a"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
             "mainClass": "manage.App",
             "projectName": "Projeto_MC322_7c3ea91a"
         },

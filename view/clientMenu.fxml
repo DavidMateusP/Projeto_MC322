@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Conta">
+               <items>
+                  <MenuItem fx:id="excluirContaOption" mnemonicParsing="false" onAction="#deleteAccount" text="Excluir conta" />
+                  <MenuItem fx:id="sairOption" mnemonicParsing="false" onAction="#exit" text="Sair" />
+               </items>
+            </Menu>
+         </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+            <TabPane prefHeight="373.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Alugar">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="640.0">
+                           <children>
+                              <Label layoutX="67.0" layoutY="31.0" text="Alugar">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="67.0" layoutY="71.0" text="Insira o nome do(a) item">
+                                 <font>
+                                    <Font name="Ubuntu" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="itemName" layoutX="250.0" layoutY="67.0" prefHeight="24.0" prefWidth="226.0" />
+                              <Button fx:id="searchButton" layoutX="517.0" layoutY="68.0" mnemonicParsing="false" onAction="#search" text="Buscar">
+                                 <font>
+                                    <Font name="Ubuntu" size="13.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="67.0" layoutY="101.0" text="Resultados da busca">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ListView layoutX="67.0" layoutY="122.0" prefHeight="111.0" prefWidth="508.0" />
+                              <CheckBox fx:id="option1" layoutX="79.0" layoutY="133.0" mnemonicParsing="false" onAction="#opt1Selected" text="Opçao ">
+                                 <font>
+                                    <Font name="Ubuntu" size="14.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="option2" layoutX="79.0" layoutY="162.0" mnemonicParsing="false" onAction="#opt2Selected" text="Opçao ">
+                                 <font>
+                                    <Font name="Ubuntu" size="14.0" />
+                                 </font>
+                              </CheckBox>
+                              <CheckBox fx:id="option3" layoutX="79.0" layoutY="192.0" mnemonicParsing="false" onAction="#opt3Selected" text="Opçao ">
+                                 <font>
+                                    <Font name="Ubuntu" size="14.0" />
+                                 </font>
+                              </CheckBox>
+                              <DatePicker fx:id="date" layoutX="67.0" layoutY="251.0" onAction="#defineDate" prefHeight="24.0" prefWidth="198.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </DatePicker>
+                              <Button fx:id="rentButton" layoutX="432.0" layoutY="251.0" mnemonicParsing="false" onAction="#rent" prefHeight="24.0" prefWidth="143.0" text="Alugar">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="67.0" layoutY="295.0" text="ATENCAO">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="131.0" layoutY="295.0" text="Alugue um item por vez.  So sao permitidos ate 5 empretimos de ate 15 dias">
+                                 <font>
+                                    <Font name="Ubuntu" size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Emprestimos">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="68.0" layoutY="34.0" text="Emprestimos">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <ListView layoutX="68.0" layoutY="79.0" prefHeight="201.0" prefWidth="517.0" />
+                              <Label layoutX="68.0" layoutY="294.0" text="ATENCAO">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="132.0" layoutY="294.0" text="Renovacoes feitas expiram em 15 dias">
+                                 <font>
+                                    <Font name="Ubuntu" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="saveButton" layoutX="408.0" layoutY="289.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="177.0" text="Salvar">
+                                 <font>
+                                    <Font name="Ubuntu Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                              <Label fx:id="opt1" layoutX="90.0" layoutY="96.0" text="Opcao">
+                                 <font>
+                                    <Font name="Ubuntu" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="opt2" layoutX="90.0" layoutY="128.0" text="Opcao">
+                                 <font>
+                                    <Font name="Ubuntu" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="opt3" layoutX="90.0" layoutY="161.0" text="Opcao">
+                                 <font>
+                                    <Font name="Ubuntu" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="opt4" layoutX="90.0" layoutY="193.0" text="Opcao">
+                                 <font>
+                                    <Font name="Ubuntu" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="opt5" layoutX="90.0" layoutY="228.0" text="Opcao">
+                                 <font>
+                                    <Font name="Ubuntu" size="18.0" />
+                                 </font>
+                              </Label>
+                              <MenuButton fx:id="select3" layoutX="416.0" layoutY="159.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="134.0" text="Selecione">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Renovar" />
+                                    <MenuItem mnemonicParsing="false" text="Devolver" />
+                                 </items>
+                                 <font>
+                                    <Font name="Ubuntu" size="13.0" />
+                                 </font>
+                              </MenuButton>
+                              <MenuButton fx:id="select4" layoutX="416.0" layoutY="192.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="134.0" text="Selecione">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Renovar" />
+                                    <MenuItem mnemonicParsing="false" text="Devolver" />
+                                 </items>
+                                 <font>
+                                    <Font name="Ubuntu" size="13.0" />
+                                 </font>
+                              </MenuButton>
+                              <Label fx:id="date1" layoutX="166.0" layoutY="99.0" text="Data">
+                                 <font>
+                                    <Font name="Ubuntu Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="date2" layoutX="166.0" layoutY="131.0" text="Data">
+                                 <font>
+                                    <Font name="Ubuntu Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="date3" layoutX="166.0" layoutY="164.0" text="Data">
+                                 <font>
+                                    <Font name="Ubuntu Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="date4" layoutX="166.0" layoutY="196.0" text="Data">
+                                 <font>
+                                    <Font name="Ubuntu Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="date5" layoutX="166.0" layoutY="231.0" text="Data">
+                                 <font>
+                                    <Font name="Ubuntu Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <MenuButton fx:id="select2" layoutX="416.0" layoutY="127.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="134.0" text="Selecione">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Renovar" />
+                                    <MenuItem mnemonicParsing="false" text="Devolver" />
+                                 </items>
+                                 <font>
+                                    <Font name="Ubuntu" size="13.0" />
+                                 </font>
+                              </MenuButton>
+                              <MenuButton fx:id="select5" layoutX="416.0" layoutY="227.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="134.0" text="Selecione">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Renovar" />
+                                    <MenuItem mnemonicParsing="false" text="Devolver" />
+                                 </items>
+                                 <font>
+                                    <Font name="Ubuntu" size="13.0" />
+                                 </font>
+                              </MenuButton>
+                              <MenuButton fx:id="select1" layoutX="416.0" layoutY="95.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="134.0" text="Selecione">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Renovar" />
+                                    <MenuItem mnemonicParsing="false" text="Devolver" />
+                                 </items>
+                                 <font>
+                                    <Font name="Ubuntu" size="13.0" />
+                                 </font>
+                              </MenuButton>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
