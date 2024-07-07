@@ -1,11 +1,9 @@
 package manage;
 
-import java.uti1.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);
+        java.util.Scanner input = new java.util.Scanner(System.in);
         int option = 0;
         System.out.println("Welcome to our rental store service!\n");
         do {

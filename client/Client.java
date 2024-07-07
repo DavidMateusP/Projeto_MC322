@@ -29,7 +29,7 @@ public class Client implements Serializable {
     }
 
     public int getAge() {
-        return Period.between(LocalDate.now(), birthDate).getYears();
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     public double getBalance() {

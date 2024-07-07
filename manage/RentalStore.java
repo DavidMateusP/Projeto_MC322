@@ -24,10 +24,7 @@ public class RentalStore {
 
     public boolean addProduct(Item item) {
         boolean added = this.products.add(item);
-        // if the product was propperly added to the array, it is included in the file
-        if (added) {
-            productsToFile(item);
-        }
+        productsToFile();
         return added;
     }
 
@@ -39,15 +36,14 @@ public class RentalStore {
                 throw new IllegalArgumentException("This product was not found.");
             } else {
                 removed = this.products.remove(index);
-                productsToFile(item);
+                productsToFile();
+                return removed;
             } 
             // return this.products.remove(this.products.indexOf(item));
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            return null;
-
+            return removed;
         }
-        return removed;
         
     }
 
@@ -57,28 +53,22 @@ public class RentalStore {
 
     public boolean addClient(Client client) {
         boolean added = this.clients.add(client);
-        // if the client was propperly added to the array, it is included in the file
-        if (added) {
-            clientsToFile(client);
-        }
+        clientsToFile();
         return added;
     }
 
     public Client removeClient(Client client) {
-        Client removed = null;
         try {
             int index = this.clients.indexOf(client);
             if (index < 0) {
                 throw new IllegalArgumentException("This client was not found.");
             } else {
-                removed = this.clients.remove(this.clients.indexOf(client));
-                clientsToFile(client);
+                return this.clients.remove(this.clients.indexOf(client));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
-        return removed;
     }
 
     public boolean alreadySigned(String cpf) {
@@ -120,11 +110,14 @@ public class RentalStore {
 
 
     
-    protected void productsToFile(Item product) {
+    protected void productsToFile() {
         try {
-            try(FileOutputStream out = new FileOutputStream(productsFile, true);
+            try(FileOutputStream out = new FileOutputStream(productsFile);
             ObjectOutputStream obj = new ObjectOutputStream(out)) {
-                obj.writeObject(product);
+                for(Item product : products) {
+                    obj.writeObject(product);
+                }
+                
             }    
             //obj.close();
         } catch (IOException err) {
@@ -132,14 +125,15 @@ public class RentalStore {
         }
     }
 
-    protected void clientsToFile(Client client) {
+    protected void clientsToFile() {
         try {
             //garantees that the file is not overwriten everytime a new client is added
             try(
-                FileOutputStream f = new FileOutputStream(clientsFile, true);
+                FileOutputStream f = new FileOutputStream(clientsFile);
                 ObjectOutputStream output = new ObjectOutputStream(f)) {
-                    output.writeObject(client);
-                    //output.close();
+                    for (Client client : clients) {
+                        output.writeObject(client);
+                    }
                 }
         } catch(IOException ex) {
             ex.printStackTrace();
@@ -149,24 +143,32 @@ public class RentalStore {
     // reads the products from the file products_file into the array
     protected void productsFromFile() {
         int i = 0;
+        ArrayList<Item> tempArray = new ArrayList<>();
         try {
             try(ObjectInputStream input = new ObjectInputStream(new FileInputStream(productsFile));) {
-       
+                
                 while(true) {
-                    Item p = (Item) input.readObject();
-                    System.out.println("Lendo o produto "+ (++i));
-                    System.out.println("Produto: " + p.getName()+ "\n" + "Quantidade: " + p.getQuantity()+ "\n" + 
+                    try {
+                        Item p = (Item) input.readObject();
+                        tempArray.add(p);
+                        System.out.println("Reading product "+ (++i));
+                        System.out.println("Product: " + p.getName()+ "\n" + "Quantity: " + p.getQuantity()+ "\n" + 
                                         "Available: " + p.getAvailableQuantity() + "\n" + "Release Year: " + p.getReleaseYear() +
                                         "\n" + "Recommended Age: " + p.getRecommendedAge() + "\n" + "Price: " + p.getPrice() + "\n" +
                                         "Rating: " + p.getAverageRating() + "\n");
+                    } catch(EOFException e) {
+                        System.out.println(e.getMessage());  
+                        break;  
+                    }
                 }
             } 
-        } catch (EOFException endOfFileException) {
-            return;
         } catch (ClassNotFoundException classNotFoundException) {
             System.exit(1);
         } catch(IOException ex) {
             ex.printStackTrace();
+        } finally {
+            this.products.clear();
+            this.products.addAll(tempArray);
         }
         
     }
@@ -174,22 +176,30 @@ public class RentalStore {
     // reads the products from the file products_file into the array
     protected void clientsFromFile() {
         int i=0;
+        ArrayList<Client> tempArray = new ArrayList<>();
         try {
             
             try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(clientsFile))) {
                 
                 while(true) {
-                    Client c = (Client) input.readObject();
-                    System.out.println("Lendo o cliente "+ (++i));
-                    System.out.println(c.getBalance()+ "\n" + c.getLoans()+ "\n" + c.getName() + "\n" + c.getAge() + "\n" + c.getCpf());
+                    try {
+                        Client c = (Client) input.readObject();
+                        tempArray.add(c);
+                        System.out.println("Reading client "+ (++i));
+                        System.out.println("Client: "+ c.getName()+"\n" +"CPF: "+ c.getCpf()+ "\n" +"Age: "+ c.getAge()+"\n" + "Saldo: "+c.getBalance()+ "\n" +"Loans: "+ c.getLoans());
+                    } catch(EOFException e) {
+                        System.out.println(e.getMessage());  
+                        break;
+                    }
                 }
             }
-        } catch (EOFException endOfFileException) {
-            return;
         } catch (ClassNotFoundException classNotFoundException) {
             System.exit(1);
         } catch(IOException ex) {
             ex.printStackTrace();
+        } finally {
+            this.clients.clear();
+            this.clients.addAll(tempArray);
         }
         
     }
