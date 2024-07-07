@@ -47,6 +47,9 @@ public class Client implements Serializable {
     public ArrayList<Loan> getLoans() {
         return loans;
     }
+    public Loan getLoan(int id){
+        return loans.get(id);
+    }
 
     public void addLoan(Loan loan) {
         loans.add(loan);
