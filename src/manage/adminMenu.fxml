@@ -37,11 +37,9 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -53,54 +51,16 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminMenu">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
+    <MenuBar VBox.vgrow="NEVER" />
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane>
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Devolucoes proximas" textAlignment="CENTER" wrapText="false">
               <font>
-                <Font size="18.0" fx:id="x1" />
+                <Font name="Ubuntu Bold" size="18.0" fx:id="x1" />
               </font>
               <textFill>
                 <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
@@ -115,21 +75,70 @@
               <children>
                         <TabPane prefHeight="507.0" prefWidth="422.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
-                            <Tab fx:id="windowChange" text="Buscar Livros">
+                            <Tab text="Buscar">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="486.0" prefWidth="422.0">
                                        <children>
-                                          <ListView id="listItem" fx:id="searchList" layoutX="10.0" layoutY="78.0" prefHeight="388.0" prefWidth="402.0" />
-                                          <TextField fx:id="searchTextInput" layoutX="14.0" layoutY="14.0" onInputMethodTextChanged="#saveText" prefHeight="26.0" prefWidth="386.0" />
-                                          <Button fx:id="searchButton" layoutX="299.0" layoutY="51.0" mnemonicParsing="false" onAction="#searchItem" prefHeight="26.0" prefWidth="90.0" text="Button" />
-                                          <ChoiceBox fx:id="filterMenu" layoutX="23.0" layoutY="52.0" prefWidth="150.0" />
+                                          <ListView fx:id="searchList" layoutX="10.0" layoutY="99.0" prefHeight="367.0" prefWidth="402.0" />
+                                          <TextField fx:id="searchTextInput" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="251.0" />
+                                          <Button fx:id="searchButton" layoutX="310.0" layoutY="55.0" mnemonicParsing="false" onAction="#searchItem" prefHeight="26.0" prefWidth="90.0" text="Buscar">
+                                             <font>
+                                                <Font name="Ubuntu Bold" size="13.0" />
+                                             </font></Button>
+                                          <ChoiceBox fx:id="filterMenu" layoutX="278.0" layoutY="15.0" prefHeight="24.0" prefWidth="122.0" />
                                        </children>
                                     </AnchorPane>
                               </content>
                             </Tab>
-                            <Tab text="Untitled Tab 2">
+                            <Tab text="Adicionar">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton fx:id="album" layoutX="14.0" layoutY="55.0" mnemonicParsing="false" text="Album" />
+                                          <Label layoutX="14.0" layoutY="14.0" text="Adicionar Item">
+                                             <font>
+                                                <Font name="Ubuntu Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <RadioButton fx:id="book" layoutX="106.0" layoutY="55.0" mnemonicParsing="false" text="Livro" />
+                                          <RadioButton fx:id="board" layoutX="273.0" layoutY="55.0" mnemonicParsing="false" text="Jogo de tabuleiro" />
+                                          <RadioButton fx:id="movie" layoutX="193.0" layoutY="55.0" mnemonicParsing="false" text="Filme" />
+                                          <TextField fx:id="itemName1" layoutX="70.0" layoutY="125.0" prefHeight="24.0" prefWidth="338.0" />
+                                          <TextField fx:id="qtd" layoutX="70.0" layoutY="168.0" prefHeight="24.0" prefWidth="43.0" />
+                                          <TextField fx:id="age" layoutX="120.0" layoutY="308.0" prefHeight="24.0" prefWidth="41.0" />
+                                          <TextField fx:id="priceValue" layoutX="108.0" layoutY="262.0" prefHeight="24.0" prefWidth="59.0" />
+                                          <TextField fx:id="year" layoutX="153.0" layoutY="210.0" prefHeight="24.0" prefWidth="81.0" />
+                                          <Label layoutX="18.0" layoutY="130.0" text="Nome">
+                                             <font>
+                                                <Font name="Ubuntu" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="18.0" layoutY="172.0" text="Qtd.">
+                                             <font>
+                                                <Font name="Ubuntu" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="14.0" layoutY="313.0" text="Idade minima">
+                                             <font>
+                                                <Font name="Ubuntu" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="15.0" layoutY="266.0" text="Preco (R$)">
+                                             <font>
+                                                <Font name="Ubuntu" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="16.0" layoutY="215.0" prefHeight="15.0" prefWidth="118.0" text="Ano de lancamento">
+                                             <font>
+                                                <Font name="Ubuntu" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="addButton" layoutX="170.0" layoutY="362.0" mnemonicParsing="false" onAction="#add" text="Adicionar">
+                                             <font>
+                                                <Font name="Ubuntu Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children></AnchorPane>
                               </content>
                             </Tab>
                           </tabs>

@@ -35,13 +35,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -49,11 +47,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="signInController">
   <children>
     <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane minHeight="551.0" minWidth="520.0" prefHeight="551.0" prefWidth="520.0">
+        <AnchorPane minHeight="424.0" minWidth="520.0" prefHeight="424.0" prefWidth="898.0">
           <children>
                   <Accordion layoutX="10.0" layoutY="35.0" />
               <ScrollPane layoutX="-212.0" layoutY="-8.0" prefHeight="-1.0" prefWidth="-1.0">
@@ -62,61 +60,49 @@
                      </content>
               </ScrollPane>
                   <Label layoutX="364.0" layoutY="202.0" />
-                  <Label layoutX="449.0" layoutY="119.0" text="Criar conta">
+                  <Label layoutX="452.0" layoutY="161.0" text="Login">
                      <font>
                         <Font name="Ubuntu Bold" size="24.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="449.0" layoutY="202.0" prefHeight="33.0" prefWidth="294.0">
+                  <PasswordField fx:id="cpf" layoutX="452.0" layoutY="252.0" prefHeight="35.0" prefWidth="305.0">
                      <font>
-                        <Font name="Ubuntu" size="18.0" />
+                        <Font name="Ubuntu Mono" size="20.0" />
                      </font>
-                  </TextField>
-                  <Label layoutX="449.0" layoutY="174.0" text="Nome de usuario">
-                     <font>
-                        <Font name="Ubuntu" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="449.0" layoutY="268.0" text="CPF">
+                  </PasswordField>
+                  <Label layoutX="452.0" layoutY="216.0" text="CPF">
                      <font>
                         <Font name="Ubuntu" size="18.0" />
                      </font>
                   </Label>
-                  <Button layoutX="449.0" layoutY="491.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="159.0" text="Feito" />
-                  <Label layoutX="496.0" layoutY="271.0" text="apenas os numeros" textFill="#00000057">
+                  <Button fx:id="login" layoutX="449.0" layoutY="333.0" mnemonicParsing="false" onAction="#verifyLogin" prefHeight="29.0" prefWidth="148.0" text="Entrar" />
+                  <Label layoutX="513.0" layoutY="219.0" text="Apenas os numeros" textFill="#00000057">
                      <font>
                         <Font name="Ubuntu" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="59.0" layoutY="119.0" text="Bem vindo">
+                  <Label layoutX="60.0" layoutY="162.0" text="Bem vindo">
                      <font>
                         <Font name="Ubuntu Bold" size="48.0" />
                      </font>
                   </Label>
-                  <Label layoutX="59.0" layoutY="269.0" text="RentalStore!">
+                  <Label layoutX="58.0" layoutY="289.0" text="RentalStore!">
                      <font>
                         <Font name="Ubuntu Bold" size="48.0" />
                      </font>
                   </Label>
-                  <Label layoutX="59.0" layoutY="190.0" text="ao sistema">
+                  <Label layoutX="58.0" layoutY="224.0" text="ao sistema">
                      <font>
                         <Font name="Ubuntu Bold" size="48.0" />
                      </font>
                   </Label>
                   <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="27.0" prefWidth="900.0" />
-                  <Label layoutX="449.0" layoutY="359.0" text="Data de Nascimento">
+                  <Button fx:id="signup" layoutX="604.0" layoutY="333.0" mnemonicParsing="false" onAction="#showSignUp" prefHeight="29.0" prefWidth="148.0" text="Criar conta" />
+                  <Label layoutX="604.0" layoutY="317.0" text="Ainda nao tem usuario?" textFill="#00000057">
                      <font>
-                        <Font name="Ubuntu" size="18.0" />
+                        <Font name="Ubuntu" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="449.0" layoutY="297.0" prefHeight="33.0" prefWidth="294.0">
-                     <font>
-                        <Font name="Ubuntu" size="18.0" />
-                     </font>
-                  </TextField>
-                  <DatePicker layoutX="449.0" layoutY="387.0" prefHeight="33.0" prefWidth="294.0" />
-                  <RadioButton layoutX="449.0" layoutY="445.0" mnemonicParsing="false" text="Cliente" />
-                  <RadioButton layoutX="550.0" layoutY="445.0" mnemonicParsing="false" text="Administrador" />
           </children>
         </AnchorPane>
       </items>

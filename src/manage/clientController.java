@@ -12,8 +12,10 @@ import products.Item;
 import products.Movie;
 import products.Track;
 import client.Loan;
+import client.Rating;
+import client.Rates;
 
-import client.Loan;
+import java.awt.image.ReplicateScaleFilter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,12 +29,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
-public class clientController {
-
-    @FXML
-    private DatePicker date;
+public class clientController extends Controller{
 
     @FXML
     private Label date1;
@@ -48,6 +48,21 @@ public class clientController {
 
     @FXML
     private Label date5;
+
+    @FXML
+    private ToggleButton dev1;
+
+    @FXML
+    private ToggleButton dev2;
+
+    @FXML
+    private ToggleButton dev3;
+
+    @FXML
+    private ToggleButton dev4;
+
+    @FXML
+    private ToggleButton dev5;
 
     @FXML
     private MenuItem excluirContaOption;
@@ -74,13 +89,23 @@ public class clientController {
     private Label opt5;
 
     @FXML
-    private CheckBox option1; 
+    private CheckBox option1;
+    
+    @FXML
+    private ToggleButton ren1;
 
     @FXML
-    private CheckBox option2;
+    private ToggleButton ren2;
 
     @FXML
-    private CheckBox option3;
+    private ToggleButton ren3;
+
+    @FXML
+    private ToggleButton ren4;
+
+    @FXML
+    private ToggleButton ren5;
+
 
     @FXML
     private Button rentButton;
@@ -94,28 +119,9 @@ public class clientController {
     @FXML
     private Button searchButton;
 
-    @FXML
-    private MenuButton select1;
-
-    @FXML
-    private MenuButton select2;
-
-    @FXML
-    private MenuButton select3;
-
-    @FXML
-    private MenuButton select4;
-
-    @FXML
-    private MenuButton select5;
-
     private Item itemSelected = null;
     private ArrayList<Loan> loans = ((Client)RentalStore.getCurrentClient()).getLoans();
 
-    @FXML
-    void defineDate(ActionEvent event, Loan option) {
-        option.setDate(date.getValue());
-    }
 
     @FXML
     void deleteAccount(ActionEvent event) {
@@ -136,7 +142,7 @@ public class clientController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(signInScene);
             window.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -145,25 +151,57 @@ public class clientController {
     @FXML
     void option1Selected(ActionEvent event) {
         option1.setSelected(true);
-        option2.setSelected(false);
-        option3.setSelected(false);
-        itemSelected = RentalStore.searchItem(option1.getText()).get(0); //TODO: implement searchItem}
+        itemSelected = RentalStore.searchItem(option1.getText()); 
     }
 
     @FXML
-    void option2Selected(ActionEvent event) {
-        option1.setSelected(false);
-        option2.setSelected(true);
-        option3.setSelected(false);
-        itemSelected = RentalStore.searchItem(option2.getText()).get(0); //TODO: implement searchItem
+    void removeloan1(ActionEvent event) {
+        returnLoan(0);
     }
 
     @FXML
-    void option3Selected(ActionEvent event) {
-        option1.setSelected(false);
-        option2.setSelected(false);
-        option3.setSelected(true);
-        itemSelected = RentalStore.searchItem(option3.getText()).get(0); //TODO: implement searchItem
+    void removeloan2(ActionEvent event) {
+        returnLoan(1);
+    }
+
+    @FXML
+    void removeloan3(ActionEvent event) {
+        returnLoan(2);
+    }
+
+    @FXML
+    void removeloan4(ActionEvent event) {
+        returnLoan(3);
+    }
+
+    @FXML
+    void removeloan5(ActionEvent event) {
+        returnLoan(4);
+    }
+
+    @FXML
+    void renew1(ActionEvent event) {
+        renew(0);
+    }
+
+    @FXML
+    void renew2(ActionEvent event) {
+        renew(1);
+    }
+
+    @FXML
+    void renew3(ActionEvent event) {
+        renew(2);
+    }
+
+    @FXML
+    void renew4(ActionEvent event) {
+        renew(3);
+    }
+
+    @FXML
+    void renew5(ActionEvent event) {
+        renew(4);
     }
 
     @FXML
@@ -179,21 +217,18 @@ public class clientController {
 
     @FXML
     void save(ActionEvent event) {
-
+        showEmprestimos(event);
     }
 
     @FXML
     void search(ActionEvent event) {
-        ArrayList<Item> items = RentalStore.searchItem(itemName.getText()); //TODO: implement searchItem
-        if (items.isEmpty()) {
+        Item item = RentalStore.searchItem(itemName.getText()); //TODO: implement searchItem
+        if (item == null) {
             JOptionPane.showMessageDialog(null, "No items found.");
             option1.setText("");
-            option2.setText("");
-            option3.setText("");
+            
         } else {
-            option1.setText(items.get(0).getName());
-            option2.setText(items.size() > 1 ? items.get(1).getName() : "");
-            option3.setText(items.size() > 2 ? items.get(2).getName() : "");
+            option1.setText(item.getName());
         }
 
     }
@@ -245,6 +280,28 @@ public class clientController {
             opt5.setText("");
         }
     }
+    
+    private boolean returnLoan(int id){
+        if (id < 0 || id >= loans.size()) {
+            return false;
+        }
+        Loan loan = loans.get(id);
+        String message = loan.returnItem(new Rating(Rates.VERY_GOOD));
+        JOptionPane.showMessageDialog(null, message);
+        return true;
+    }
 
+    private boolean renew(int id){
+        if (id < 0 || id >= loans.size()) {
+            return false;
+        }
+        Loan loan = loans.get(id);
+        if (loan.isRenewed()) {
+            return false;
+        }
+        String message = loan.renewItem(15);
+        JOptionPane.showMessageDialog(null, message);
+        return true;
+    }
 }
 

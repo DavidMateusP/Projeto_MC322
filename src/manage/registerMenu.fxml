@@ -35,9 +35,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -48,7 +48,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="signInController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="signUpController">
   <children>
     <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
@@ -61,22 +61,17 @@
                      </content>
               </ScrollPane>
                   <Label layoutX="364.0" layoutY="202.0" />
-                  <Label layoutX="449.0" layoutY="119.0" text="Login">
+                  <Label layoutX="449.0" layoutY="119.0" text="Criar conta">
                      <font>
                         <Font name="Ubuntu Bold" size="24.0" />
                      </font>
                   </Label>
-                  <PasswordField layoutX="449.0" layoutY="297.0" prefHeight="29.0" prefWidth="294.0">
-                     <font>
-                        <Font name="Ubuntu Mono" size="20.0" />
-                     </font>
-                  </PasswordField>
-                  <TextField layoutX="449.0" layoutY="202.0" prefHeight="33.0" prefWidth="294.0">
+                  <TextField fx:id="username" layoutX="449.0" layoutY="202.0" prefHeight="33.0" prefWidth="294.0">
                      <font>
                         <Font name="Ubuntu" size="18.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="449.0" layoutY="174.0" text="Nome de usuario">
+                  <Label layoutX="449.0" layoutY="174.0" text="Nome completo">
                      <font>
                         <Font name="Ubuntu" size="18.0" />
                      </font>
@@ -86,7 +81,7 @@
                         <Font name="Ubuntu" size="18.0" />
                      </font>
                   </Label>
-                  <Button layoutX="449.0" layoutY="374.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="159.0" text="Entrar" />
+                  <Button fx:id="doneButton" layoutX="449.0" layoutY="451.0" mnemonicParsing="false" onAction="#signUp" prefHeight="29.0" prefWidth="159.0" text="Feito" />
                   <Label layoutX="496.0" layoutY="271.0" text="apenas os numeros" textFill="#00000057">
                      <font>
                         <Font name="Ubuntu" size="14.0" />
@@ -108,6 +103,17 @@
                      </font>
                   </Label>
                   <MenuBar layoutX="-1.0" layoutY="1.0" prefHeight="27.0" prefWidth="900.0" />
+                  <Label layoutX="449.0" layoutY="359.0" text="Data de Nascimento">
+                     <font>
+                        <Font name="Ubuntu" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="cpf" layoutX="449.0" layoutY="297.0" prefHeight="33.0" prefWidth="294.0">
+                     <font>
+                        <Font name="Ubuntu" size="18.0" />
+                     </font>
+                  </TextField>
+                  <DatePicker fx:id="birthdate" layoutX="449.0" layoutY="387.0" prefHeight="33.0" prefWidth="294.0" />
           </children>
         </AnchorPane>
       </items>

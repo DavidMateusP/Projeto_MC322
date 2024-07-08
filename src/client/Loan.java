@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
-
 import products.Item;
 
 public class Loan {
@@ -23,19 +22,19 @@ public class Loan {
 
     public static String newLoan(Client client, Item item) {
         if (item.getAvailableQuantity() <= 0)
-            return "Item fora de Estoque";
+            return "Item out of stock";
 
         if (client.getBalance() < 0)
-            return "O cliente está com saldo negativo: " + Double.toString(client.getBalance());
+            return "The client has a negative balance: " + Double.toString(client.getBalance());
 
         if (client.hasLateItems())
-            return "O cliente possui itens atrasados";
+            return "The client has late items";
 
         if (client.getLoans().size() >= 5)
-            return "O cliente já possui 5 empréstimos simultâneos";
+            return "The client already has 5 simultaneous loans";
 
         if (client.getAge() < item.getRecommendedAge())
-            return "O cliente não tem idade para pegar este item";
+            return "The client is not old enough to borrow this item";
 
         // Sets the deadline of two weeks to the item rented
         LocalDate deadline = LocalDate.now().plusDays(15);
@@ -50,8 +49,8 @@ public class Loan {
         client.changeBalance(-item.getPrice());
 
         System.out.println("Enjoy " + item.getName() + "! You can return it or renew it until: " + loan.getDeadline());
-        return "Sucesso";
-    }
+        return "Success";
+        }
 
     // Getters and Setters
     public Client getClient() {
@@ -120,17 +119,17 @@ public class Loan {
     public String renewItem(int days) {
         // Verifies if the loan is late on the return deadline
         if (isLate())
-            return "O item está atrasado, e portanto não pode ser renovado";
+            return "The item is late and cannot be renewed";
 
         // This loan was already renewed
         if (isRenewed())
-            return "O item só pode ser renovado uma vez";
+            return "The item can only be renewed once";
 
         client.changeBalance(-calcRenewCost(days));
         deadline = deadline.plusDays(days);
         renewed = true;
 
-        return "Sucesso";
+        return "Success";
     }
 
     public String returnItem(Rating itemReview) {
@@ -145,11 +144,13 @@ public class Loan {
             // Change the clients balance
             final Double penalty = calcPenalty();
             client.changeBalance(-penalty);
-
-            return "O item estava atrasado. Foi cobrada uma multa de " + penalty.toString() + "R$";
+            if (late) {
+                // Change the client's balance
+                client.changeBalance(-penalty);
+                return "The item was late. A penalty of R$" + penalty.toString() + " was charged";
+            }
         }
-        return "O item foi devolvido";
-
+            return "The item has been returned";
     }
 
     public boolean isCurrentWeek(){
