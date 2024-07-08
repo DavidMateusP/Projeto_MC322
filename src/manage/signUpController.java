@@ -45,14 +45,21 @@ public class signUpController extends Controller {
         Client client = new Client(name, birthdateValue, cpf);
         if (isCPFRegistered(cpf)) {
             JOptionPane.showMessageDialog(null, "CPF already exists in the database.");
-        } else {
+        } 
+        else if (name.isEmpty() || cpf.isEmpty() || birthdateValue == null) {
+            JOptionPane.showMessageDialog(null, "Please fill all the fields.");
+        } 
+        else if (!RentalStore.validateCPF(cpf)) {
+            JOptionPane.showMessageDialog(null, "Invalid CPF.");
+        }
+        else {
             RentalStore.addClient(client);
             JOptionPane.showMessageDialog(null, "Client account created successfully!");
             System.out.println("Name: " + name);
             System.out.println("CPF: " + cpf);
             System.out.println("Birthdate: " + birthdateValue);
+            showScene("loginMenu.fxml", event);
         }
-        showScene("loginMenu.fxml", event);
     }
 
     private boolean isCPFRegistered(String cpf) {
