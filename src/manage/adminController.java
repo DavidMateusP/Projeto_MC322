@@ -104,9 +104,14 @@ public class adminController implements Initializable {
 
     @FXML
     void searchItem(ActionEvent event) {
-        String textsearch = searchTextInput.getText();
-        String filter = filterMenu.getValue();
-        searchList.setItems(DataProvider.findItem(filter, textsearch));
+        String textSearch = searchTextInput.getText();
+        Item found = RentalStore.searchItem(textSearch);
+
+        ObservableList<Item> search = FXCollections.observableArrayList();
+        if(found != null) {
+            search.add(found);
+        }
+        searchList.setItems(search);
         formatTextItem(searchList);
     }
 

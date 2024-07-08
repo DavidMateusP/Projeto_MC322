@@ -101,6 +101,15 @@ public abstract class RentalStore {
         return null;
     }
 
+    public static Item searchItem(String name) {
+        for(Item item : products) {
+            if(item.getName().equalsIgnoreCase(name)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         String list = "Rental Store\n\tProducts:\t";
