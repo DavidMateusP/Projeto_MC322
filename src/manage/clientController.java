@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import client.Client;
+import client.Loan;
+import client.Rates;
+import client.Rating;
 import products.Album;
 import products.BoardGame;
 import products.Book;
 import products.Item;
 import products.Movie;
 import products.Track;
-import client.Loan;
-import client.Rating;
-import client.Rates;
 
 import java.awt.image.ReplicateScaleFilter;
 import javafx.event.ActionEvent;

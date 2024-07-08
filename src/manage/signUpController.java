@@ -8,7 +8,6 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import client.Client;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,9 +54,6 @@ public class signUpController extends Controller {
         else {
             RentalStore.addClient(client);
             JOptionPane.showMessageDialog(null, "Client account created successfully!");
-            System.out.println("Name: " + name);
-            System.out.println("CPF: " + cpf);
-            System.out.println("Birthdate: " + birthdateValue);
             showScene("loginMenu.fxml", event);
         }
     }
