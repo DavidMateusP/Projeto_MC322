@@ -1,6 +1,5 @@
 package manage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -8,14 +7,8 @@ import client.Client;
 import client.Loan;
 import client.Rates;
 import client.Rating;
-import products.Album;
-import products.BoardGame;
-import products.Book;
 import products.Item;
-import products.Movie;
-import products.Track;
 
-import java.awt.image.ReplicateScaleFilter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,15 +17,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
-public class clientController extends Controller{
+public class clientController extends Controller {
 
     @FXML
     private Label date1;
@@ -74,8 +65,7 @@ public class clientController extends Controller{
     private Button load;
 
     @FXML
-    private Label opt1; //TODO: set options to items (option1.setText(RentalStore.getCurrentClient().getLoan(0).getItem().getName()))
-
+    private Label opt1;
     @FXML
     private Label opt2;
 
@@ -90,7 +80,7 @@ public class clientController extends Controller{
 
     @FXML
     private CheckBox option1;
-    
+
     @FXML
     private ToggleButton ren1;
 
@@ -106,7 +96,6 @@ public class clientController extends Controller{
     @FXML
     private ToggleButton ren5;
 
-
     @FXML
     private Button rentButton;
 
@@ -120,8 +109,7 @@ public class clientController extends Controller{
     private Button searchButton;
 
     private Item itemSelected = null;
-    private ArrayList<Loan> loans = ((Client)RentalStore.getCurrentClient()).getLoans();
-
+    private ArrayList<Loan> loans = ((Client) RentalStore.getCurrentClient()).getLoans();
 
     @FXML
     void deleteAccount(ActionEvent event) {
@@ -151,7 +139,7 @@ public class clientController extends Controller{
     @FXML
     void option1Selected(ActionEvent event) {
         option1.setSelected(true);
-        itemSelected = RentalStore.searchItem(option1.getText()); 
+        itemSelected = RentalStore.searchItem(option1.getText());
     }
 
     @FXML
@@ -209,7 +197,7 @@ public class clientController extends Controller{
         if (itemSelected == null) {
             JOptionPane.showMessageDialog(null, "Please select an item.");
         } else {
-            RentalStore.getCurrentClient().rentItem(itemSelected);
+            Loan.newLoan(RentalStore.getCurrentClient(), itemSelected);
             String message = Loan.newLoan(RentalStore.getCurrentClient(), itemSelected);
             JOptionPane.showMessageDialog(null, message);
         }
@@ -222,11 +210,11 @@ public class clientController extends Controller{
 
     @FXML
     void search(ActionEvent event) {
-        Item item = RentalStore.searchItem(itemName.getText()); //TODO: implement searchItem
+        Item item = RentalStore.searchItem(itemName.getText());
         if (item == null) {
             JOptionPane.showMessageDialog(null, "No items found.");
             option1.setText("");
-            
+
         } else {
             option1.setText(item.getName());
         }
@@ -238,8 +226,7 @@ public class clientController extends Controller{
         if (loans.size() > 0) {
             date1.setText(loans.get(0).getDeadline().toString());
             opt1.setText(loans.get(0).getItem().getName());
-        }
-        else{
+        } else {
             date1.setText("");
             opt1.setText("");
         }
@@ -247,8 +234,7 @@ public class clientController extends Controller{
         if (loans.size() > 1) {
             date2.setText(loans.get(1).getDeadline().toString());
             opt2.setText(loans.get(1).getItem().getName());
-        }
-        else{
+        } else {
             date2.setText("");
             opt2.setText("");
         }
@@ -256,8 +242,7 @@ public class clientController extends Controller{
         if (loans.size() > 2) {
             date3.setText(loans.get(2).getDeadline().toString());
             opt3.setText(loans.get(2).getItem().getName());
-        }
-        else{
+        } else {
             date3.setText("");
             opt3.setText("");
         }
@@ -265,8 +250,7 @@ public class clientController extends Controller{
         if (loans.size() > 3) {
             date4.setText(loans.get(3).getDeadline().toString());
             opt4.setText(loans.get(3).getItem().getName());
-        }
-        else{
+        } else {
             date4.setText("");
             opt4.setText("");
         }
@@ -274,14 +258,13 @@ public class clientController extends Controller{
         if (loans.size() > 4) {
             date5.setText(loans.get(4).getDeadline().toString());
             opt5.setText(loans.get(4).getItem().getName());
-        }
-        else{
+        } else {
             date5.setText("");
             opt5.setText("");
         }
     }
-    
-    private boolean returnLoan(int id){
+
+    private boolean returnLoan(int id) {
         if (id < 0 || id >= loans.size()) {
             return false;
         }
@@ -291,7 +274,7 @@ public class clientController extends Controller{
         return true;
     }
 
-    private boolean renew(int id){
+    private boolean renew(int id) {
         if (id < 0 || id >= loans.size()) {
             return false;
         }
@@ -304,4 +287,3 @@ public class clientController extends Controller{
         return true;
     }
 }
-

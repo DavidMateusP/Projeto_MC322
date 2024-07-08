@@ -24,18 +24,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 
-import client.Client;
 import products.Album;
 import products.BoardGame;
 import products.Book;
 import products.Item;
 import products.Movie;
-import products.Track;
-import client.Loan;
-import client.Rating;
 
 public class adminController implements Initializable {
-    
+
     @FXML
     private Button addButton;
 
@@ -50,7 +46,7 @@ public class adminController implements Initializable {
 
     @FXML
     private RadioButton book;
-    
+
     @FXML
     private ChoiceBox<String> filterMenu;
 
@@ -71,7 +67,6 @@ public class adminController implements Initializable {
 
     @FXML
     private TextField qtd;
-
 
     @FXML
     private Button searchButton;
@@ -149,7 +144,7 @@ public class adminController implements Initializable {
         Item found = RentalStore.searchItem(textSearch);
 
         ObservableList<Item> search = FXCollections.observableArrayList();
-        if(found != null) {
+        if (found != null) {
             search.add(found);
         }
         searchList.setItems(search);

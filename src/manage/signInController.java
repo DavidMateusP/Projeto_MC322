@@ -42,7 +42,7 @@ public class signInController extends Controller {
             JOptionPane.showMessageDialog(null, "You are not signed up yet. Please create an account!");
         } else if (cpf.equalsIgnoreCase("admin")) {
             JOptionPane.showMessageDialog(null, "Admin signed in successfully!");
-            showScene("adminMenu.fxml", event); //TODO: finish adminMenu.fxml
+            showScene("adminMenu.fxml", event);
         } else {
             System.out.println("Signed in successfully!");
             JOptionPane.showMessageDialog(null, "Signed in successfully!");
