@@ -6,5 +6,8 @@ Resumo do projeto: Locadora de filmes, jogos, álbuns de música e livros. Siste
 
 Descrição das classes e funcionalidades que atendem às necessidades da locadora proposta em pdf constam no documento abaixo:
 
-[Relatório - Projeto 1.pdf](https://github.com/DavidMateusP/Projeto_MC322/files/15409845/Relatorio.-.Projeto.1.pdf)
+[Relatório - Projeto 1](https://docs.google.com/document/d/1PCrfI-_MpfXlSEcpVVtSGCeLKncNRcn3ni60l3UUguo/edit?usp=sharing)
 
+[Repositório do grupo](https://github.com/DavidMateusP/Projeto_MC322)
+
+[Slides do vídeo](https://docs.google.com/presentation/d/1J_GvPi0hzh98OHnftnCPquHKX9BsRptv9nOWB7aA6E0/edit?usp=sharing)
